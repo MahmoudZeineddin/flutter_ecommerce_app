@@ -1,19 +1,33 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
-import 'package:flutter_ecommerce_app/core/extensions/context_extensions.dart';
-import 'package:flutter_ecommerce_app/core/themes/colors.dart';
-import 'package:flutter_ecommerce_app/views/models/home_carousel_item_model.dart';
-import 'package:flutter_ecommerce_app/views/models/product_item_model.dart';
-import 'package:flutter_ecommerce_app/views/widgets/product_item.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_app/common.dart';
+import 'package:flutter_ecommerce_app/view_models/home_cubit/home_cubit.dart';
+import 'package:flutter_ecommerce_app/views/widgets/home_page/category_tap_bar_view.dart';
+import 'package:flutter_ecommerce_app/views/widgets/home_page/home_tap_bar_view.dart';
 import 'package:remixicon/remixicon.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  late final TabController _tapController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tapController = TabController(length: 2, vsync: this);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
+    return BlocProvider(
+      create: (context) => HomeCubitCubit(),
+      child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(18.0),
           child: Column(
@@ -25,8 +39,8 @@ class HomePage extends StatelessWidget {
                     children: [
                       const CircleAvatar(
                         radius: 25,
-                        backgroundImage: NetworkImage(
-                          'https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000',
+                        backgroundImage: CachedNetworkImageProvider(
+                          "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000",
                         ),
                       ),
                       const SizedBox(width: 10),
@@ -62,78 +76,45 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: context.heightPct(.04)),
-
-              FlutterCarousel.builder(
-                options: FlutterCarouselOptions(
-                  height: context.heightPct(.20),
-                  showIndicator: true,
-                  viewportFraction: 1, // make imgae take all width
-                  floatingIndicator: false,
-                  slideIndicator: CircularSlideIndicator(
-                    slideIndicatorOptions: const SlideIndicatorOptions(
-                      indicatorRadius: 3.5,
-                      itemSpacing: 12.0,
-                      currentIndicatorColor: AppColors.primaryColor,
-                      indicatorBackgroundColor: AppColors.inactiveGrey,
-                    ),
+              SizedBox(height: context.heightPct(.02)),
+              TabBar(
+                controller: _tapController,
+                unselectedLabelColor: AppColors.inactiveGrey,
+                dividerColor: Colors.transparent,
+                labelColor: AppColors.mainText,
+                // indicatorSize: TabBarIndicatorSize.label,
+                indicator: const UnderlineTabIndicator(
+                  borderSide: BorderSide(
+                    width: 2.0,
+                    color: AppColors.primaryColor,
                   ),
                 ),
-                itemCount: dummyCarouselItems.length,
-                itemBuilder:
-                    (BuildContext context, int itemIndex, int pageViewIndex) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(22),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.only(end: 3.0),
-                          child: Image.network(
-                            dummyCarouselItems[itemIndex].imgUrl,
-                            fit: BoxFit.fill,
-                            width: double.infinity,
-                          ),
-                        ),
-                      );
-                    },
-              ),
-
-              SizedBox(height: context.heightPct(.04)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    ' New Arrifals🔥',
-                    style: context.textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
+                tabs: [
+                  Tab(
+                    child: Container(
+                      width: context.widthPct(.25),
+                      alignment: Alignment.center,
+                      child: const Text("Home"),
                     ),
                   ),
-
-                  Text(
-                    ' See All',
-                    style: context.textTheme.labelLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primaryColor,
+                  Tab(
+                    child: Container(
+                      width: context.widthPct(.25),
+                      alignment: Alignment.center,
+                      child: const Text("Category"),
                     ),
                   ),
                 ],
               ),
-
               SizedBox(height: context.heightPct(.02)),
-
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: dummyProducts.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.6,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 15,
+              Expanded(
+                child: TabBarView(
+                  controller: _tapController,
+                  children: [
+                    const HomeTapBarView(),
+                    const CategoryTapBarView(),
+                  ],
                 ),
-                itemBuilder: (context, index) {
-                  return ProductItem(productItemModel: dummyProducts[index]);
-                },
               ),
             ],
           ),

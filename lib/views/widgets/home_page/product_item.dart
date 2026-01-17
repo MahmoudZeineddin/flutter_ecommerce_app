@@ -1,7 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/extensions/context_extensions.dart';
 import 'package:flutter_ecommerce_app/core/themes/colors.dart';
-import 'package:flutter_ecommerce_app/views/models/product_item_model.dart';
+import 'package:flutter_ecommerce_app/views/models/home_page/product_item_model.dart';
 import 'package:remixicon/remixicon.dart';
 
 class ProductItem extends StatelessWidget {
@@ -23,17 +24,23 @@ class ProductItem extends StatelessWidget {
 
           child: Stack(
             children: [
-              Image.network(
-                productItemModel.imageUrl,
-                height: context.heightPct(.30),
-                fit: BoxFit.contain,
+              Padding(
+                padding: EdgeInsets.all(context.heightPct(.024)),
+                child: CachedNetworkImage(
+                  imageUrl: productItemModel.imageUrl,
+                  height: context.heightPct(.30),
+                  fit: BoxFit.contain,
+                  placeholder: (context, url) =>
+                      const CircularProgressIndicator.adaptive(),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                ),
               ),
+
               Positioned(
                 top: 8,
                 right: 8,
                 child: CircleAvatar(
                   radius: 16,
-
                   backgroundColor: AppColors.favoriteItemBackground,
                   child: IconButton(
                     padding: EdgeInsets.zero,
