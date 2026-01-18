@@ -4,8 +4,8 @@ import 'package:flutter_ecommerce_app/views/models/home_page/product_item_model.
 
 part 'home_state.dart';
 
-class HomeCubitCubit extends Cubit<HomeState> {
-  HomeCubitCubit() : super(HomeCubitInitial());
+class HomeCubit extends Cubit<HomeState> {
+  HomeCubit() : super(HomeCubitInitial());
 
   void getHomeData() {
     emit(HomeLoading());
