@@ -103,10 +103,7 @@ class _HomeTapBarViewState extends State<HomeTapBarView>
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        Navigator.of(
-                          // rootNavigator: true,
-                          context,
-                        ).pushNamed(
+                        Navigator.of(rootNavigator: true, context).pushNamed(
                           AppRoutes.productDetailsRoute,
                           arguments: state.products[index].id,
                         );
