@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/common.dart';
 import 'package:flutter_ecommerce_app/view_models/product_details__cubit/product_details_cubit.dart';
+import 'package:flutter_ecommerce_app/views/widgets/details_page/product_purchase_bar.dart';
+import 'package:flutter_ecommerce_app/views/widgets/details_page/quantity_contor.dart';
 import 'package:readmore/readmore.dart';
 import 'package:remixicon/remixicon.dart';
 
@@ -16,8 +18,8 @@ class ProductDetailsPage extends StatefulWidget {
 
 class _ProductDetailsPageState extends State<ProductDetailsPage> {
   int selectedColorIndex = -1;
-  int quantity = 1;
-  Widget colorBox(BuildContext context, Color color, int index) {
+
+  Widget _colorBox(BuildContext context, Color color, int index) {
     bool isClicked = selectedColorIndex == index;
     return Padding(
       padding: EdgeInsets.only(right: context.widthPct(.05)),
@@ -52,6 +54,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             body: Center(child: CircularProgressIndicator.adaptive()),
           );
         } else if (state is ProductDetailsLoaded) {
+          final cubit = context.read<ProductsDetailsCubit>();
+          int displayQuantity = cubit.quantity;
           final product = state.productItemModel;
           return Scaffold(
             appBar: AppBar(
@@ -63,89 +67,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 ),
               ],
             ),
-            bottomNavigationBar: Container(
-              height: context.heightPct(0.12),
-              padding: EdgeInsets.symmetric(
-                horizontal: context.widthPct(0.05),
-                vertical: 10,
-              ),
-              decoration: const BoxDecoration(
-                color: AppColors.scaffoldBackground,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
-                ),
-                //
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: context.widthPct(.30),
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: RichText(
-                            text: TextSpan(
-                              style: context.textTheme.displaySmall?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.mainText,
-                              ),
-                              children: [
-                                const TextSpan(
-                                  text: '\$ ',
-                                  style: TextStyle(
-                                    color: AppColors.primaryColor,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: (product.price * quantity)
-                                      .toStringAsFixed(2),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: context.widthPct(0.50),
-                    height: 55,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                      ),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            RemixIcons.shopping_bag_4_line,
-                            color: AppColors.scaffoldBackground,
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            "Add to Cart",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            bottomNavigationBar: const ProductPurchaseBar(),
 
             body: Stack(
               children: [
@@ -194,10 +116,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                       children: [
                                         Text(
                                           product.name,
-                                          style: context.textTheme.titleMedium!
-                                              .copyWith(
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                          style: AppTextStyles.headingBigSize(
+                                            context,
+                                          ),
                                         ),
                                         Row(
                                           children: [
@@ -211,11 +132,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                             ),
                                             Text(
                                               product.rating.toString(),
-                                              style: context
-                                                  .textTheme
-                                                  .titleMedium!
-                                                  .copyWith(
-                                                    fontWeight: FontWeight.bold,
+                                              style:
+                                                  AppTextStyles.headingSmallSize(
+                                                    context,
                                                   ),
                                             ),
                                             SizedBox(
@@ -223,13 +142,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                             ),
                                             Text(
                                               '(${product.numberOfReviews.toString()} Reviews)',
-                                              style: context
-                                                  .textTheme
-                                                  .titleSmall!
-                                                  .copyWith(
-                                                    color:
-                                                        AppColors.secondaryText,
-                                                  ),
+                                              style: AppTextStyles.subHeading(
+                                                context,
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -238,134 +153,23 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
                                     Column(
                                       children: [
-                                        Container(
-                                          width: context.widthPct(.27),
-                                          height: context.heightPct(.045),
-                                          decoration: BoxDecoration(
-                                            color:
-                                                AppColors.productItemBackground,
-                                            borderRadius: BorderRadius.circular(
-                                              20,
-                                            ),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(4.0),
-                                            child: FittedBox(
-                                              fit: BoxFit.scaleDown,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                          1.0,
-                                                        ),
-                                                    child: Container(
-                                                      width: context.widthPct(
-                                                        .07,
-                                                      ),
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                            color: AppColors
-                                                                .scaffoldBackground,
-                                                            shape:
-                                                                BoxShape.circle,
-                                                          ),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets.all(
-                                                              2.0,
-                                                            ),
-                                                        child: InkWell(
-                                                          onTap: () {
-                                                            setState(() {
-                                                              quantity > 1
-                                                                  ? quantity--
-                                                                  : null;
-                                                            });
-                                                          },
-                                                          child: const Icon(
-                                                            RemixIcons
-                                                                .subtract_fill,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: context.widthPct(
-                                                      .02,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    quantity.toString(),
-                                                    style: context
-                                                        .textTheme
-                                                        .titleLarge!
-                                                        .copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          color: AppColors
-                                                              .mainText,
-                                                        ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: context.widthPct(
-                                                      .02,
-                                                    ),
-                                                  ),
-
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                          1.0,
-                                                        ),
-                                                    child: Container(
-                                                      width: context.widthPct(
-                                                        .07,
-                                                      ),
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                            color: AppColors
-                                                                .scaffoldBackground,
-                                                            shape:
-                                                                BoxShape.circle,
-                                                          ),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets.all(
-                                                              2.0,
-                                                            ),
-                                                        child: InkWell(
-                                                          onTap: () {
-                                                            setState(() {
-                                                              quantity++;
-                                                            });
-                                                          },
-                                                          child: const Icon(
-                                                            RemixIcons.add_line,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
+                                        QuantityContor(
+                                          quantity: cubit.quantity,
+                                          onDecrement: () =>
+                                              cubit.updateQuantity(
+                                                displayQuantity - 1,
                                               ),
-                                            ),
-                                          ),
+                                          onIncrement: () =>
+                                              cubit.updateQuantity(
+                                                displayQuantity + 1,
+                                              ),
                                         ),
                                         SizedBox(
                                           height: context.heightPct(.007),
                                         ),
                                         Text(
                                           'Avaliable in stok',
-                                          style: context.textTheme.labelMedium!
-                                              .copyWith(
-                                                color: AppColors.mainText,
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                          style: AppTextStyles.body(context),
                                         ),
                                       ],
                                     ),
@@ -378,17 +182,15 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                   children: [
                                     Text(
                                       "Colors",
-                                      style: context.textTheme.titleMedium!
-                                          .copyWith(
-                                            color: AppColors.mainText,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                      style: AppTextStyles.headingSmallSize(
+                                        context,
+                                      ),
                                     ),
                                     SizedBox(height: context.heightPct(.005)),
                                     Row(
                                       children: List.generate(
                                         product.availableColors.length,
-                                        (index) => colorBox(
+                                        (index) => _colorBox(
                                           context,
                                           product.availableColors[index],
                                           index,
@@ -403,11 +205,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                   children: [
                                     Text(
                                       "Description",
-                                      style: context.textTheme.titleMedium!
-                                          .copyWith(
-                                            color: AppColors.mainText,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                      style: AppTextStyles.headingSmallSize(
+                                        context,
+                                      ),
                                     ),
                                     SizedBox(height: context.heightPct(.01)),
                                     ReadMoreText(
@@ -418,18 +218,15 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                       trimMode: TrimMode.Line,
                                       trimCollapsedText: 'Read more',
                                       trimExpandedText: ' Read less',
-                                      moreStyle: context.textTheme.titleSmall!
-                                          .copyWith(
-                                            fontWeight: FontWeight.bold,
-                                            color: AppColors.primaryColor,
-                                          ),
-                                      lessStyle: context.textTheme.titleSmall!
-                                          .copyWith(
-                                            fontWeight: FontWeight.bold,
-                                            color: AppColors.primaryColor,
-                                          ),
-                                      style: context.textTheme.titleMedium!
-                                          .copyWith(color: AppColors.mainText),
+                                      moreStyle: AppTextStyles.body(
+                                        context,
+                                        color: AppColors.primaryColor,
+                                      ),
+                                      lessStyle: AppTextStyles.body(
+                                        context,
+                                        color: AppColors.primaryColor,
+                                      ),
+                                      style: AppTextStyles.body(context),
                                     ),
                                   ],
                                 ),
@@ -446,7 +243,10 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           );
         } else if (state is ProductDetailsError) {
           return Center(
-            child: Text(state.message, style: context.textTheme.titleLarge),
+            child: Text(
+              state.message,
+              style: AppTextStyles.headingBigSize(context),
+            ),
           );
         } else {
           return const SizedBox.shrink();

@@ -17,3 +17,10 @@ final class ProductDetailsError extends ProductsDetailsState {
 
   ProductDetailsError({required this.message});
 }
+
+class ProductPriceUpdated extends ProductsDetailsState {
+  final int quantity;
+  final double totalPrice;
+
+  ProductPriceUpdated({required this.quantity, required this.totalPrice});
+}
