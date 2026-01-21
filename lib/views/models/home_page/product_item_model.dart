@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// what a bout size is very important attrubite????
 class ProductItemModel {
   final String id;
   final String name;

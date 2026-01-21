@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/common.dart';
 import 'package:flutter_ecommerce_app/views/widgets/custom_button.dart';
-import 'package:remixicon/remixicon.dart';
 
 class ProductPurchaseBar extends StatefulWidget {
-  const ProductPurchaseBar({super.key});
+  final double price;
+
+  const ProductPurchaseBar({super.key, required this.price});
 
   @override
   State<ProductPurchaseBar> createState() => _ProductPurchaseBarState();
@@ -46,12 +47,7 @@ class _ProductPurchaseBarState extends State<ProductPurchaseBar> {
                           text: '\$ ',
                           style: TextStyle(color: AppColors.primaryColor),
                         ),
-                        TextSpan(
-                          text: "120,00",
-                          // (product.price)
-                          // * quantity
-                          // .toStringAsFixed(2),
-                        ),
+                        TextSpan(text: widget.price.toString()),
                       ],
                     ),
                   ),

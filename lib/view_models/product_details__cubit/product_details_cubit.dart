@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter_ecommerce_app/common.dart';
 
@@ -12,17 +14,36 @@ class ProductsDetailsCubit extends Cubit<ProductsDetailsState> {
     emit(ProductDetailsLoading());
     Future.delayed(const Duration(seconds: 2), () {
       selectedProduct = dummyProducts.firstWhere((product) => product.id == id);
-      emit(ProductDetailsLoaded(productItemModel: selectedProduct!));
+      emit(
+        ProductDetailsLoaded(
+          productItemModel: selectedProduct!,
+          quantity: quantity,
+          totalPrice: selectedProduct!.price,
+          selectedColor: selectedProduct!.availableColors.first,
+        ),
+      );
     });
   }
 
   void updateQuantity(int newQuantity) {
-    if (selectedProduct != null && newQuantity >= 1) {
+    if (state is ProductDetailsLoaded) {
+      final currentState = state as ProductDetailsLoaded;
       quantity = newQuantity;
-      double totalPrice = selectedProduct!.price * quantity;
-      emit(ProductPriceUpdated(quantity: quantity, totalPrice: totalPrice));
+      if (newQuantity >= 1) {
+        emit(
+          currentState.copyWith(
+            quantity: newQuantity,
+            totalPrice: currentState.productItemModel.price * newQuantity,
+          ),
+        );
+      }
     }
   }
 
-  double get currentTotalPrice => selectedProduct!.price * quantity;
+  void selectColor(Color color) {
+    if (state is ProductDetailsLoaded) {
+      final currentState = state as ProductDetailsLoaded;
+      emit(currentState.copyWith(selectedColor: color));
+    }
+  }
 }

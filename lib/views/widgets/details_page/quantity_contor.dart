@@ -1,28 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/common.dart';
-import 'package:remixicon/remixicon.dart';
 
-class QuantityContor extends StatefulWidget {
+class QuantityCounter extends StatelessWidget {
   final int quantity;
   final VoidCallback onIncrement;
   final VoidCallback onDecrement;
 
-  const QuantityContor({
+  const QuantityCounter({
     super.key,
     required this.quantity,
     required this.onIncrement,
     required this.onDecrement,
   });
 
-  @override
-  State<QuantityContor> createState() => _QuantityContorState();
-}
-
-class _QuantityContorState extends State<QuantityContor> {
   Widget _counterButton(
     BuildContext context,
     IconData icon,
-    VoidCallback onTap,
+    VoidCallback? onTap,
   ) {
     return Padding(
       padding: const EdgeInsets.all(1.0),
@@ -34,14 +28,7 @@ class _QuantityContorState extends State<QuantityContor> {
         ),
         child: Padding(
           padding: const EdgeInsets.all(2.0),
-          child: InkWell(
-            onTap: () {
-              setState(() {
-                onTap;
-              });
-            },
-            child: Icon(icon),
-          ),
+          child: InkWell(onTap: onTap, child: Icon(icon)),
         ),
       ),
     );
@@ -50,8 +37,7 @@ class _QuantityContorState extends State<QuantityContor> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: context.widthPct(.27),
-      height: context.heightPct(.045),
+      padding: const EdgeInsets.symmetric(horizontal: 9),
       decoration: BoxDecoration(
         color: AppColors.productItemBackground,
         borderRadius: BorderRadius.circular(20),
@@ -62,15 +48,16 @@ class _QuantityContorState extends State<QuantityContor> {
           fit: BoxFit.scaleDown,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisSize: MainAxisSize.min,
             children: [
               _counterButton(
                 context,
                 RemixIcons.subtract_fill,
-                () => widget.quantity > 1 ? widget.onDecrement : null,
+                quantity > 1 ? onDecrement : null,
               ),
               SizedBox(width: context.widthPct(.02)),
               Text(
-                widget.quantity.toString(),
+                quantity.toString(),
                 style: AppTextStyles.headingBigSize(
                   context,
                   fontWeigth: FontWeight.normal,
@@ -78,11 +65,7 @@ class _QuantityContorState extends State<QuantityContor> {
               ),
 
               SizedBox(width: context.widthPct(.02)),
-              _counterButton(
-                context,
-                RemixIcons.add_line,
-                () => widget.onIncrement,
-              ),
+              _counterButton(context, RemixIcons.add_line, onIncrement),
             ],
           ),
         ),
