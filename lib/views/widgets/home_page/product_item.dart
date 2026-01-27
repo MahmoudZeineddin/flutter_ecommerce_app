@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/extensions/context_extensions.dart';
 import 'package:flutter_ecommerce_app/core/themes/colors.dart';
-import 'package:flutter_ecommerce_app/views/models/home_page/product_item_model.dart';
+import 'package:flutter_ecommerce_app/models/home_page/product_item_model.dart';
 import 'package:remixicon/remixicon.dart';
 
 class ProductItem extends StatelessWidget {

@@ -28,7 +28,6 @@ List<HomeCarouselItemModel> dummyCarouselItems = [
     imgUrl:
         'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?q=80&w=1000',
   ),
-
   HomeCarouselItemModel(
     id: 's2',
     imgUrl:

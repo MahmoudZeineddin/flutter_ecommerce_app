@@ -52,7 +52,10 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     color: AppColors.productItemBackground,
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(context.heightPct(.05)),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: context.heightPct(.04),
+                      vertical: context.widthPct(.25),
+                    ),
                     child: CachedNetworkImage(
                       imageUrl: product.imageUrl,
                       fit: BoxFit.contain,
