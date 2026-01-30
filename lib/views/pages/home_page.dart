@@ -5,7 +5,6 @@ import 'package:flutter_ecommerce_app/common.dart';
 import 'package:flutter_ecommerce_app/view_models/home_cubit/home_cubit.dart';
 import 'package:flutter_ecommerce_app/views/widgets/home_page/category_tap_bar_view.dart';
 import 'package:flutter_ecommerce_app/views/widgets/home_page/home_tap_bar_view.dart';
-import 'package:remixicon/remixicon.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

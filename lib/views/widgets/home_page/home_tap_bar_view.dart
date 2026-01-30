@@ -5,6 +5,7 @@ import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_ecommerce_app/common.dart';
 import 'package:flutter_ecommerce_app/core/routers/app_routes.dart';
 import 'package:flutter_ecommerce_app/view_models/home_cubit/home_cubit.dart';
+import 'package:flutter_ecommerce_app/views/widgets/home_page/category_card.dart';
 import 'package:flutter_ecommerce_app/views/widgets/home_page/product_item.dart';
 
 class HomeTapBarView extends StatefulWidget {
@@ -66,26 +67,43 @@ class _HomeTapBarViewState extends State<HomeTapBarView>
                         );
                       },
                 ),
+                SizedBox(height: context.heightPct(.02)),
+                SizedBox(
+                  height: context.heightPct(.16),
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemCount: state.categories.length,
+                    itemBuilder: (context, index) {
+                      return CategoryCard(
+                        categoryModel: state.categories[index],
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(height: context.heightPct(.01)),
 
-                SizedBox(height: context.heightPct(.04)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      ' New Arrifals 🔥',
-                      style: context.textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'New Arrivals 🔥',
+                        style: context.textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-
-                    Text(
-                      ' See All',
-                      style: context.textTheme.labelLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.primaryColor,
+                      Text(
+                        'See All',
+                        style: context.textTheme.labelLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.primaryColor,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
 
                 SizedBox(height: context.heightPct(.02)),

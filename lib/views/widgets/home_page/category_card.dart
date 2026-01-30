@@ -1,79 +1,60 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/common.dart';
-import 'package:flutter_ecommerce_app/models/home_page/category_model.dart';
+import 'package:flutter_ecommerce_app/views/models/home_page/category_model.dart';
 
 class CategoryCard extends StatelessWidget {
-  final CategoryModel category;
-  final int index;
-  const CategoryCard({super.key, required this.category, required this.index});
+  final CategoryModel categoryModel;
+  const CategoryCard({super.key, required this.categoryModel});
 
-  Widget _buildInfo(BuildContext context, bool isEven) {
-    return Expanded(
-      flex: 3,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
+      child: Container(
+        height: context.heightPct(.10),
+        width: context.widthPct(.18),
+        decoration: BoxDecoration(
+          color: AppColors.productItemBackground,
+          borderRadius: BorderRadius.circular(15),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-
-          crossAxisAlignment: isEven
-              ? CrossAxisAlignment.start
-              : CrossAxisAlignment.end,
           children: [
-            Text(
-              category.name,
-              style: context.textTheme.titleLarge!.copyWith(
-                fontWeight: FontWeight.bold,
-                color: AppColors.mainText,
+            Expanded(
+              flex: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CachedNetworkImage(
+                  imageUrl: categoryModel.image,
+                  fit: BoxFit.contain,
+                  placeholder: (context, url) =>
+                      const CircularProgressIndicator.adaptive(strokeWidth: 2),
+                  errorWidget: (context, url, error) =>
+                      const Icon(Icons.category_outlined),
+                ),
               ),
             ),
-            const SizedBox(height: 6),
-            Text(
-              '${category.itemCount} Produsts',
-              style: context.textTheme.labelLarge!.copyWith(
-                color: AppColors.mainText,
+
+            Expanded(
+              // flex: 1,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  child: Text(
+                    categoryModel.name,
+                    style: AppTextStyles.headingSmallSize(
+                      context,
+                    ).copyWith(fontSize: 11),
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
               ),
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildImage() {
-    return Expanded(
-      flex: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Transform.scale(
-          scale: 1.3,
-          child: CachedNetworkImage(
-            imageUrl: category.image,
-            fit: BoxFit.contain,
-            placeholder: (context, url) =>
-                const CircularProgressIndicator.adaptive(),
-            errorWidget: (context, url, error) => const Icon(Icons.error),
-          ),
-        ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    bool isEven = index % 2 == 0;
-    return Container(
-      height: context.heightPct(.13),
-      margin: const EdgeInsets.only(bottom: 18),
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      decoration: BoxDecoration(
-        color: AppColors.productItemBackground,
-        borderRadius: BorderRadius.circular(28),
-      ),
-      child: Row(
-        children: isEven
-            ? [_buildInfo(context, isEven), _buildImage()] // صورة يمين
-            : [_buildImage(), _buildInfo(context, isEven)], // صورة يسار
       ),
     );
   }

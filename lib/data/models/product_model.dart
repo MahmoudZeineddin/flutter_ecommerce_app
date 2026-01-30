@@ -11,9 +11,14 @@ class ProductItemModel {
   final double rating;
   final int numberOfReviews;
   final List<Color> availableColors;
+
   final String category;
+
+  // final Map<String, dynamic> specifications;
   final bool isFavorite;
   final bool isNewArrival;
+  // final bool isAvailable;
+  // final DateTime createdAt;
 
   ProductItemModel({
     required this.id,
