@@ -9,20 +9,23 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
-      child: Container(
-        height: context.heightPct(.10),
-        width: context.widthPct(.18),
-        decoration: BoxDecoration(
-          color: AppColors.productItemBackground,
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              flex: 2,
+    return Column(
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 8,
+              right: 8,
+              top: 30,
+              bottom: 5,
+            ),
+            child: Container(
+              width: context.widthPct(.20),
+              decoration: BoxDecoration(
+                color: AppColors.productItemBackground,
+                borderRadius: BorderRadius.circular(15),
+                shape: BoxShape.rectangle,
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CachedNetworkImage(
@@ -35,27 +38,16 @@ class CategoryCard extends StatelessWidget {
                 ),
               ),
             ),
-
-            Expanded(
-              // flex: 1,
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  child: Text(
-                    categoryModel.name,
-                    style: AppTextStyles.headingSmallSize(
-                      context,
-                    ).copyWith(fontSize: 11),
-                    textAlign: TextAlign.center,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
+        Text(
+          categoryModel.name,
+          style: AppTextStyles.headingSmallSize(context).copyWith(fontSize: 11),
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ],
     );
   }
 }

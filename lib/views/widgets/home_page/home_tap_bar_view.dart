@@ -67,7 +67,7 @@ class _HomeTapBarViewState extends State<HomeTapBarView>
                         );
                       },
                 ),
-                SizedBox(height: context.heightPct(.02)),
+                SizedBox(height: context.heightPct(.007)),
                 SizedBox(
                   height: context.heightPct(.16),
                   child: ListView.builder(
@@ -82,7 +82,7 @@ class _HomeTapBarViewState extends State<HomeTapBarView>
                     },
                   ),
                 ),
-                SizedBox(height: context.heightPct(.01)),
+                SizedBox(height: context.heightPct(.04)),
 
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),

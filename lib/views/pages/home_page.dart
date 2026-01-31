@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/common.dart';
 import 'package:flutter_ecommerce_app/view_models/home_cubit/home_cubit.dart';
+import 'package:flutter_ecommerce_app/views/widgets/custom_tap_bar.dart';
 import 'package:flutter_ecommerce_app/views/widgets/home_page/category_tap_bar_view.dart';
 import 'package:flutter_ecommerce_app/views/widgets/home_page/home_tap_bar_view.dart';
 
@@ -80,45 +81,51 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 ],
               ),
               SizedBox(height: context.heightPct(.02)),
-              TabBar(
-                controller: _tapController,
-                unselectedLabelColor: AppColors.inactiveGrey,
-                dividerColor: Colors.transparent,
-                labelColor: AppColors.mainText,
-                // indicatorSize: TabBarIndicatorSize.label,
-                indicator: const UnderlineTabIndicator(
-                  borderSide: BorderSide(
-                    width: 2.0,
-                    color: AppColors.primaryColor,
-                  ),
-                ),
-                tabs: [
-                  Tab(
-                    child: Container(
-                      width: context.widthPct(.25),
-                      alignment: Alignment.center,
-                      child: const Text("Home"),
-                    ),
-                  ),
-                  Tab(
-                    child: Container(
-                      width: context.widthPct(.25),
-                      alignment: Alignment.center,
-                      child: const Text("Category"),
-                    ),
-                  ),
-                ],
+
+              // TabBar(
+              //   controller: _tapController,
+              //   unselectedLabelColor: AppColors.inactiveGrey,
+              //   dividerColor: Colors.transparent,
+              //   labelColor: AppColors.mainText,
+              //   // indicatorSize: TabBarIndicatorSize.label,
+              //   indicator: const UnderlineTabIndicator(
+              //     borderSide: BorderSide(
+              //       width: 2.0,
+              //       color: AppColors.primaryColor,
+              //     ),
+              //   ),
+              //   tabs: [
+              //     Tab(
+              //       child: Container(
+              //         width: context.widthPct(.25),
+              //         alignment: Alignment.center,
+              //         child: const Text("Home"),
+              //       ),
+              //     ),
+              //     Tab(
+              //       child: Container(
+              //         width: context.widthPct(.25),
+              //         alignment: Alignment.center,
+              //         child: const Text("Category"),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              const CustomTapBar(
+                firstTapTitle: "Home",
+                secoundTapTitle: "Category",
               ),
-              SizedBox(height: context.heightPct(.02)),
-              Expanded(
-                child: TabBarView(
-                  controller: _tapController,
-                  children: [
-                    const HomeTapBarView(),
-                    const CategoryTapBarView(),
-                  ],
-                ),
-              ),
+
+              // SizedBox(height: context.heightPct(.02)),
+              // Expanded(
+              //   child: TabBarView(
+              //     controller: _tapController,
+              //     children: [
+              //       const HomeTapBarView(),
+              //       const CategoryTapBarView(),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ),

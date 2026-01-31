@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/common.dart';
 import 'package:flutter_ecommerce_app/view_models/product_details__cubit/product_details_cubit.dart';
+import 'package:flutter_ecommerce_app/views/widgets/custom_app_bar.dart';
 import 'package:flutter_ecommerce_app/views/widgets/details_page/product_details_sheet.dart';
 import 'package:flutter_ecommerce_app/views/widgets/details_page/product_purchase_bar.dart';
 
@@ -29,18 +30,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           state.totalPrice;
           return Scaffold(
             extendBodyBehindAppBar: true,
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              scrolledUnderElevation: 0,
-              elevation: 0,
-              title: const Text('Product items'),
-              actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(RemixIcons.shopping_bag_4_line),
-                ),
-              ],
-            ),
+            appBar: CustomAppBar(title: 'Product item', onPressed: () {}),
             bottomNavigationBar: ProductPurchaseBar(price: state.totalPrice),
 
             body: Stack(
@@ -70,7 +60,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       state.quantity - 1,
                     );
                   },
-
                   onIncrement: () {
                     context.read<ProductsDetailsCubit>().updateQuantity(
                       state.quantity + 1,
