@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/common.dart';
-import 'package:flutter_ecommerce_app/views/widgets/custom_button.dart';
+import 'package:flutter_ecommerce_app/presentation/widgets/custom_button.dart';
 
 class ProductPurchaseBar extends StatefulWidget {
   final double price;

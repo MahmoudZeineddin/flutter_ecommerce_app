@@ -2,10 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/common.dart';
-import 'package:flutter_ecommerce_app/view_models/product_details__cubit/product_details_cubit.dart';
-import 'package:flutter_ecommerce_app/views/widgets/custom_app_bar.dart';
-import 'package:flutter_ecommerce_app/views/widgets/details_page/product_details_sheet.dart';
-import 'package:flutter_ecommerce_app/views/widgets/details_page/product_purchase_bar.dart';
+import 'package:flutter_ecommerce_app/presentation/view_models/product_details__cubit/product_details_cubit.dart';
+import 'package:flutter_ecommerce_app/presentation/widgets/custom_app_bar.dart';
+import 'package:flutter_ecommerce_app/presentation/widgets/details_page/product_details_sheet.dart';
+import 'package:flutter_ecommerce_app/presentation/widgets/details_page/product_purchase_bar.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   final String productId;

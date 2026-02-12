@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/common.dart';
-import 'package:flutter_ecommerce_app/views/widgets/home_page/category_tap_bar_view.dart';
-import 'package:flutter_ecommerce_app/views/widgets/home_page/home_tap_bar_view.dart';
+import 'package:flutter_ecommerce_app/presentation/widgets/home_page/category_tap_bar_view.dart';
+import 'package:flutter_ecommerce_app/presentation/widgets/home_page/home_tap_bar_view.dart';
 
 class CustomTapBar extends StatefulWidget {
   final String firstTapTitle;

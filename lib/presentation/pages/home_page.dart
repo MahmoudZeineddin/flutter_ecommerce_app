@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/common.dart';
-import 'package:flutter_ecommerce_app/view_models/home_cubit/home_cubit.dart';
-import 'package:flutter_ecommerce_app/views/widgets/custom_tap_bar.dart';
+import 'package:flutter_ecommerce_app/presentation/view_models/home_cubit/home_cubit.dart';
+import 'package:flutter_ecommerce_app/presentation/widgets/custom_tap_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

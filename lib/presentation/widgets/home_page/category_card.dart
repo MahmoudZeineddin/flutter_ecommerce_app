@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/common.dart';
-import 'package:flutter_ecommerce_app/views/models/home_page/category_model.dart';
+import 'package:flutter_ecommerce_app/presentation/entities/home_page/category_entity.dart';
 
 class CategoryCard extends StatelessWidget {
   final CategoryModel categoryModel;

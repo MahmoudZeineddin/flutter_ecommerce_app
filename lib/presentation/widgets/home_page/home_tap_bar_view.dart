@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_ecommerce_app/common.dart';
 import 'package:flutter_ecommerce_app/core/routers/app_routes.dart';
-import 'package:flutter_ecommerce_app/view_models/home_cubit/home_cubit.dart';
-import 'package:flutter_ecommerce_app/views/widgets/home_page/category_card.dart';
-import 'package:flutter_ecommerce_app/views/widgets/home_page/product_item.dart';
+import 'package:flutter_ecommerce_app/presentation/view_models/home_cubit/home_cubit.dart';
+import 'package:flutter_ecommerce_app/presentation/widgets/home_page/category_card.dart';
+import 'package:flutter_ecommerce_app/presentation/widgets/home_page/product_item.dart';
 
 class HomeTapBarView extends StatefulWidget {
   const HomeTapBarView({super.key});

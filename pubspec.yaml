@@ -11,10 +11,12 @@ environment:
 dependencies:
   cached_network_image: ^3.4.1
   cupertino_icons: ^1.0.8
+  dio: ^5.9.1
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
   flutter_carousel_widget: ^3.1.0
+  flutter_dotenv: ^6.0.0
   persistent_bottom_nav_bar_v2: ^6.2.0
   readmore: ^3.0.0
   remixicon: ^1.4.1
@@ -25,3 +27,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - .env

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/views/models/home_page/category_model.dart'
+import 'package:flutter_ecommerce_app/presentation/entities/home_page/category_entity.dart'
     as CategoryModel;
 import 'package:flutter_ecommerce_app/data/models/product_model.dart';
-import 'package:flutter_ecommerce_app/views/widgets/home_page/category_card_tap_view.dart';
+import 'package:flutter_ecommerce_app/presentation/widgets/home_page/category_card_tap_view.dart';
 
 class CategoryTapBarView extends StatelessWidget {
   const CategoryTapBarView({super.key});

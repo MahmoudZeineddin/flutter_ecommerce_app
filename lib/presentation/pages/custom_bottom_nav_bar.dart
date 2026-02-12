@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/core/themes/colors.dart';
-import 'package:flutter_ecommerce_app/views/pages/favorite_page.dart';
-import 'package:flutter_ecommerce_app/views/pages/home_page.dart';
-import 'package:flutter_ecommerce_app/views/pages/my_order_page.dart';
-import 'package:flutter_ecommerce_app/views/pages/profile_page.dart';
+import 'package:flutter_ecommerce_app/presentation/pages/favorite_page.dart';
+import 'package:flutter_ecommerce_app/presentation/pages/home_page.dart';
+import 'package:flutter_ecommerce_app/presentation/pages/my_order_page.dart';
+import 'package:flutter_ecommerce_app/presentation/pages/profile_page.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:remixicon/remixicon.dart';
 
