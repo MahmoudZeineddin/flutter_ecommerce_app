@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_ecommerce_app/core/routers/app_router.dart';
 import 'package:flutter_ecommerce_app/core/themes/colors.dart';
-import 'package:flutter_ecommerce_app/data/models/data_sources/remote/amazon/amazon_api_client.dart';
+import 'package:flutter_ecommerce_app/core/data/data_sources/remote/amazon/amazon_api_client.dart';
 import 'package:flutter_ecommerce_app/presentation/pages/custom_bottom_nav_bar.dart';
 
 Future<void> main() async {
@@ -10,7 +10,7 @@ Future<void> main() async {
   await dotenv.load(fileName: ".env");
   final apiClient = AmazonApiClient();
 
-  apiClient.fetchTestProducts();
+  apiClient.fetchProducts();
   runApp(const MyApp());
 }
 

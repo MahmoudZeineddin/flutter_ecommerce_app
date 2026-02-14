@@ -1,4 +1,4 @@
-import 'package:flutter_ecommerce_app/data/models/product_model.dart';
+import 'package:flutter_ecommerce_app/core/data/models/product_model.dart';
 
 class CategoryModel {
   final String id;

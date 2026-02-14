@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/presentation/entities/home_page/category_entity.dart';
 import 'package:flutter_ecommerce_app/presentation/entities/home_page/home_carousel_entity.dart';
-import 'package:flutter_ecommerce_app/data/models/product_model.dart';
+import 'package:flutter_ecommerce_app/core/data/models/product_model.dart';
 
 part 'home_state.dart';
 

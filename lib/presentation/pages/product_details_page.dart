@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/common.dart';
 import 'package:flutter_ecommerce_app/presentation/view_models/product_details__cubit/product_details_cubit.dart';
-import 'package:flutter_ecommerce_app/presentation/widgets/custom_app_bar.dart';
+import 'package:flutter_ecommerce_app/core/widgets/custom_app_bar.dart';
 import 'package:flutter_ecommerce_app/presentation/widgets/details_page/product_details_sheet.dart';
 import 'package:flutter_ecommerce_app/presentation/widgets/details_page/product_purchase_bar.dart';
 

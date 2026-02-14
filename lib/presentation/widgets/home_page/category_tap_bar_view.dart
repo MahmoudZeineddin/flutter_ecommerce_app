@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/presentation/entities/home_page/category_entity.dart'
     as CategoryModel;
-import 'package:flutter_ecommerce_app/data/models/product_model.dart';
+import 'package:flutter_ecommerce_app/core/data/models/product_model.dart';
 import 'package:flutter_ecommerce_app/presentation/widgets/home_page/category_card_tap_view.dart';
 
 class CategoryTapBarView extends StatelessWidget {
