@@ -25,116 +25,134 @@ class _HomeTapBarViewState extends State<HomeTapBarView>
         if (state is HomeLoading) {
           return const Center(child: CircularProgressIndicator.adaptive());
         } else if (state is HomeLoaded) {
-          return SingleChildScrollView(
+          return Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FlutterCarousel.builder(
-                  options: FlutterCarouselOptions(
-                    height: context.heightPct(.20),
-                    autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 3),
-                    showIndicator: true,
-                    viewportFraction: 1, // make imgae take all width
-                    floatingIndicator: false,
-                    slideIndicator: CircularSlideIndicator(
-                      slideIndicatorOptions: const SlideIndicatorOptions(
-                        indicatorRadius: 3.5,
-                        itemSpacing: 12.0,
-                        currentIndicatorColor: AppColors.primaryColor,
-                        indicatorBackgroundColor: AppColors.inactiveGrey,
-                      ),
-                    ),
-                  ),
-                  itemCount: state.carouselItems.length,
-                  //  dummyCarouselItems.length,
-                  itemBuilder:
-                      (BuildContext context, int itemIndex, int pageViewIndex) {
-                        return ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.only(end: 3.0),
-                            child: CachedNetworkImage(
-                              imageUrl: state.carouselItems[itemIndex].imgUrl,
-                              width: double.infinity,
-                              fit: BoxFit.fill,
-                              progressIndicatorBuilder:
-                                  (context, url, downloadProgress) =>
-                                      const CircularProgressIndicator.adaptive(),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                            ),
-                          ),
-                        );
-                      },
-                ),
-                SizedBox(height: context.heightPct(.007)),
-                SizedBox(
-                  height: context.heightPct(.16),
-                  child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    itemCount: state.categories.length,
-                    itemBuilder: (context, index) {
-                      return CategoryCard(
-                        categoryModel: state.categories[index],
-                      );
-                    },
-                  ),
-                ),
-                SizedBox(height: context.heightPct(.04)),
-
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'New Arrivals 🔥',
-                        style: context.textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        'See All',
-                        style: context.textTheme.labelLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.primaryColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                SizedBox(height: context.heightPct(.02)),
-
-                GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: state.products.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.6,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 15,
-                  ),
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        Navigator.of(rootNavigator: true, context).pushNamed(
-                          AppRoutes.productDetailsRoute,
-                          arguments: state.products[index].id,
-                        );
-                      },
-                      child: ProductItem(
-                        productItemModel: state.products[index],
-                      ),
-                    );
-                  },
-                ),
+                Text('✅ API Works!'),
+                Text('Best Sellers: ${state.bestSellers.length}'),
+                Text('Deals: ${state.deals.length}'),
+                Text('Trending: ${state.trending.length}'),
               ],
             ),
           );
+
+          //  SingleChildScrollView(
+          //   child: Column(
+          //     children: [
+          //       FlutterCarousel.builder(
+          //         options: FlutterCarouselOptions(
+          //           height: context.heightPct(.20),
+          //           autoPlay: true,
+          //           autoPlayInterval: const Duration(seconds: 3),
+          //           showIndicator: true,
+          //           viewportFraction: 1, // make imgae take all width
+          //           floatingIndicator: false,
+          //           slideIndicator: CircularSlideIndicator(
+          //             slideIndicatorOptions: const SlideIndicatorOptions(
+          //               indicatorRadius: 3.5,
+          //               itemSpacing: 12.0,
+          //               currentIndicatorColor: AppColors.primaryColor,
+          //               indicatorBackgroundColor: AppColors.inactiveGrey,
+          //             ),
+          //           ),
+          //         ),
+          //         itemCount: 2,
+          //         // state.carouselItems.length,
+          //         //  dummyCarouselItems.length,
+          //         itemBuilder:
+          //             (BuildContext context, int itemIndex, int pageViewIndex) {
+          //               return ClipRRect(
+          //                 borderRadius: BorderRadius.circular(20),
+          //                 child: Padding(
+          //                   padding: const EdgeInsetsDirectional.only(end: 3.0),
+          //                   child: CachedNetworkImage(
+          //                     imageUrl: "....",
+          //                     // state.carouselItems[itemIndex].imgUrl,
+          //                     width: double.infinity,
+          //                     fit: BoxFit.fill,
+          //                     progressIndicatorBuilder:
+          //                         (context, url, downloadProgress) =>
+          //                             const CircularProgressIndicator.adaptive(),
+          //                     errorWidget: (context, url, error) =>
+          //                         const Icon(Icons.error),
+          //                   ),
+          //                 ),
+          //               );
+          //             },
+          //       ),
+          //       SizedBox(height: context.heightPct(.007)),
+          //       SizedBox(
+          //         height: context.heightPct(.16),
+          //         child: ListView.builder(
+          //           physics: const BouncingScrollPhysics(),
+          //           scrollDirection: Axis.horizontal,
+          //           shrinkWrap: true,
+          //           itemCount: 2,
+          //           // state.categories.length,
+          //           itemBuilder: (context, index) {
+          //             return CategoryCard(
+          //               categoryModel: state.categories[index],
+          //             );
+          //           },
+          //         ),
+          //       ),
+          //       SizedBox(height: context.heightPct(.04)),
+
+          //       Padding(
+          //         padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          //         child: Row(
+          //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //           children: [
+          //             Text(
+          //               'New Arrivals 🔥',
+          //               style: context.textTheme.titleLarge?.copyWith(
+          //                 fontWeight: FontWeight.bold,
+          //               ),
+          //             ),
+          //             Text(
+          //               'See All',
+          //               style: context.textTheme.labelLarge?.copyWith(
+          //                 fontWeight: FontWeight.bold,
+          //                 color: AppColors.primaryColor,
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+
+          //       SizedBox(height: context.heightPct(.02)),
+
+          //       GridView.builder(
+          //         shrinkWrap: true,
+          //         physics: const NeverScrollableScrollPhysics(),
+          //         itemCount: 2,
+          //         // state.products.length,
+          //         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          //           crossAxisCount: 2,
+          //           childAspectRatio: 0.6,
+          //           mainAxisSpacing: 10,
+          //           crossAxisSpacing: 15,
+          //         ),
+          //         itemBuilder: (context, index) {
+          //           return InkWell(
+          //             onTap: () {
+          //               Navigator.of(rootNavigator: true, context).pushNamed(
+          //                 AppRoutes.productDetailsRoute,
+          //                 arguments: 33,
+          //                 // state.products[index].id,
+          //               );
+          //             },
+          //             child: ProductItem(
+          //               productItemModel: state.trending,
+          //               //  state.products[index],
+          //             ),
+          //           );
+          //         },
+          //       ),
+          //     ],
+          //   ),
+          // );
         } else if (state is HomeError) {
           return Center(
             child: Text(state.message, style: context.textTheme.titleLarge),

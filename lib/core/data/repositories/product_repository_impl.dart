@@ -1,10 +1,27 @@
 import 'package:flutter_ecommerce_app/core/data/data_sources/remote/amazon/amazon_api_client.dart';
+import 'package:flutter_ecommerce_app/core/data/models/product_model_new.dart';
 import 'package:flutter_ecommerce_app/core/domain/repositories/product_repository.dart';
 
 // connect the interface to the actual API client.
+/*
+Cubit = Business Logic (What)
+Repository = Data Access (How)
+ApiClient = Implementation Details (Where)
 
+ApiClient = Delivery Driver
+Knows streets (HTTP)
+Delivers packages (API calls)
+No decisions, just transport
+
+Repository = Store Manager
+Decides: Call driver? Use stock? Return old items?
+Business decisions
+Orchestrates multiple sources
+*/
 class ProductRepositoryImpl implements ProductRepository {
   final AmazonApiClient _apiClient;
+
+  ProductRepositoryImpl(AmazonApiClient apiClient) : _apiClient = apiClient;
 
   @override
   Future<ProductModel> getProductDetails({
@@ -29,8 +46,6 @@ class ProductRepositoryImpl implements ProductRepository {
     );
   }
 
-  ProductRepositoryImpl({required AmazonApiClient apiClient})
-    : _apiClient = apiClient;
   @override
   Future<List<ProductModel>> getBestSellers({
     required String category,

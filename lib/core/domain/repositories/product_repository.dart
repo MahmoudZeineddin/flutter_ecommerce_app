@@ -1,6 +1,13 @@
-import 'package:flutter_ecommerce_app/core/data/data_sources/remote/amazon/amazon_api_client.dart';
+import 'package:flutter_ecommerce_app/core/data/models/product_model_new.dart';
 
 // what data we need
+/*
+Domain Should NEVER Change! 🎯, else if change domain WILL be healthy!
+But change it for:
+✅ User needs
+✅ Market demands
+✅ Business evolution
+*/
 abstract class ProductRepository {
   Future<List<ProductModel>> searchProducts({
     required String query,

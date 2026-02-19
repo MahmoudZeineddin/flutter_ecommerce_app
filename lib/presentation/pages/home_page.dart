@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/common.dart';
+import 'package:flutter_ecommerce_app/core/di/injection_container.dart';
 import 'package:flutter_ecommerce_app/presentation/view_models/home_cubit/home_cubit.dart';
 import 'package:flutter_ecommerce_app/presentation/widgets/custom_tap_bar.dart';
 
@@ -24,11 +25,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) {
-        final cubit = HomeCubit();
-        cubit.getHomeData();
-        return cubit;
-      },
+      create: (context) => sl<HomeCubit>()..loadHomeData(),
+
+      // final cubit = HomeCubit();
+      // cubit.getHomeData();
+      // return cubit;
       child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(18.0),

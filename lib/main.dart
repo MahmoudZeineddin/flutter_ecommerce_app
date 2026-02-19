@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_ecommerce_app/core/di/injection_container.dart';
 import 'package:flutter_ecommerce_app/core/routers/app_router.dart';
 import 'package:flutter_ecommerce_app/core/themes/colors.dart';
 import 'package:flutter_ecommerce_app/core/data/data_sources/remote/amazon/amazon_api_client.dart';
@@ -9,6 +10,7 @@ Future<void> main() async {
   // Use async/await to load .env from storage before UI rendering to prevent crashes.
   await dotenv.load(fileName: ".env");
   final apiClient = AmazonApiClient();
+  await initializeDependencies();
 
   apiClient.fetchProducts();
   runApp(const MyApp());

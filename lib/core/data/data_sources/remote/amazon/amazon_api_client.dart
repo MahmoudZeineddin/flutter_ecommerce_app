@@ -1,25 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_constants.dart';
-
-class ProductModel {
-  final String productTitle;
-  final double productPrice;
-  final double productOriginalPrice;
-
-  ProductModel({
-    required this.productTitle,
-    required this.productPrice,
-    required this.productOriginalPrice,
-  });
-
-  factory ProductModel.fromJson(Map<String, dynamic> json) {
-    return ProductModel(
-      productTitle: json['productTitle'] ?? '',
-      productPrice: (json['productPrice'] as num).toDouble(),
-      productOriginalPrice: (json['productOriginalPrice'] as num).toDouble(),
-    );
-  }
-}
+import 'package:flutter_ecommerce_app/core/data/models/product_model_new.dart';
 
 class AmazonApiClient {
   late final Dio _dio;
