@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/common.dart';
 import 'package:flutter_ecommerce_app/presentation/entities/home_page/category_entity.dart';
 
-class CategoryCard extends StatelessWidget {
+class CategoryCardSection extends StatelessWidget {
   final CategoryModel category;
   final int index;
-  const CategoryCard({super.key, required this.category, required this.index});
+  const CategoryCardSection({
+    super.key,
+    required this.category,
+    required this.index,
+  });
 
   Widget _buildInfo(BuildContext context, bool isEven) {
     return Expanded(

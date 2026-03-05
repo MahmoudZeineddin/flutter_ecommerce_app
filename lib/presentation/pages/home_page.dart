@@ -1,11 +1,46 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/common.dart';
 import 'package:flutter_ecommerce_app/core/di/injection_container.dart';
+import 'package:flutter_ecommerce_app/core/widgets/custom_search_bar.dart';
 import 'package:flutter_ecommerce_app/presentation/view_models/home_cubit/home_cubit.dart';
-import 'package:flutter_ecommerce_app/presentation/widgets/custom_tap_bar.dart';
+import 'package:flutter_ecommerce_app/presentation/widgets/home_page/category/category_list.dart';
+import 'package:flutter_ecommerce_app/presentation/widgets/home_page/home_carousel.dart';
+import 'package:flutter_ecommerce_app/presentation/widgets/home_page/prdouct/product_section.dart';
 
+/*
+👆 User opens app
+    │
+    ▼
+🚀 main.dart
+    │  initializes DI (injection_container)
+    │  registers: AmazonApiClient, ProductRepository, HomeCubit
+    ▼
+📱 MaterialApp
+    │
+    ▼
+🏠 HomePage
+    │  BlocProvider creates HomeCubit
+    │  ..loadHomeData() triggers immediately
+    ▼
+📦 HomeCubit
+    │  emit(HomeLoading) → shows spinner
+    │  calls ProductRepository
+    ▼
+🏪 ProductRepository
+    │  calls AmazonApiClient
+    ▼
+🌐 Amazon API
+    │  returns JSON
+    ▼
+📦 HomeCubit
+    │  emit(HomeLoaded) → shows products
+    ▼
+🏠 HomePage rebuilds
+    │  shows ProductSection, CategoryList...
+    ▼
+👀 User sees products ✅
+*/
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -14,120 +49,72 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  late final TabController _tapController;
-
   @override
   void initState() {
     super.initState();
-    _tapController = TabController(length: 2, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
+      // create: (context) => sl<HomeCubit>(),
+      // حل مشكلة استدعاء loadHomeData في كل مرة بعمل بسبب hot reload
       create: (context) => sl<HomeCubit>()..loadHomeData(),
+      // Cascade operator = Call method AND return original object
+      // creates HomeCubit
+      child: BlocBuilder<HomeCubit, HomeState>(
+        builder: (context, state) {
+          if (state is HomeLoading) {
+            return const Center(child: CircularProgressIndicator.adaptive());
+          }
+          if (state is HomeError) {
+            return Center(child: Text(state.message));
+          }
 
-      // final cubit = HomeCubit();
-      // cubit.getHomeData();
-      // return cubit;
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
+          if (state is HomeLoaded) {
+            return SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: SingleChildScrollView(
+                  child: Column(
                     children: [
-                      const CircleAvatar(
-                        radius: 25,
-                        backgroundImage: CachedNetworkImageProvider(
-                          "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1000",
-                        ),
+                      const CustomSearchBar(enabled: true),
+                      SizedBox(height: context.heightPct(.02)),
+                      const HomeCarousel(),
+                      SizedBox(height: context.heightPct(.02)),
+                      const CategoryList(),
+
+                      ProductSection(
+                        title: " Best Sellers ",
+                        products: state.bestSellers,
+                        onSeeAll: () {},
                       ),
-                      const SizedBox(width: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            ' Hi Mahmoud',
-                            style: context.textTheme.labelLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            'Let\'s go shopping',
-                            style: context.textTheme.labelSmall,
-                          ),
-                        ],
+                      SizedBox(height: context.heightPct(.02)),
+
+                      ProductSection(
+                        title: " Trending 🔥",
+                        products: state.trending,
+                        onSeeAll: () {},
                       ),
+                      SizedBox(height: context.heightPct(.02)),
+
+                      ProductSection(
+                        title: " Hot Deals 🔥",
+                        products: [],
+                        // state.hotDeals,
+                        onSeeAll: () {},
+                      ),
+                      SizedBox(height: context.heightPct(.02)),
+
+                      // Popular Collections
                     ],
                   ),
-
-                  Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Remix.search_line),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Remix.notification_4_line),
-                      ),
-                    ],
-                  ),
-                ],
+                ),
               ),
-              SizedBox(height: context.heightPct(.02)),
-
-              // TabBar(
-              //   controller: _tapController,
-              //   unselectedLabelColor: AppColors.inactiveGrey,
-              //   dividerColor: Colors.transparent,
-              //   labelColor: AppColors.mainText,
-              //   // indicatorSize: TabBarIndicatorSize.label,
-              //   indicator: const UnderlineTabIndicator(
-              //     borderSide: BorderSide(
-              //       width: 2.0,
-              //       color: AppColors.primaryColor,
-              //     ),
-              //   ),
-              //   tabs: [
-              //     Tab(
-              //       child: Container(
-              //         width: context.widthPct(.25),
-              //         alignment: Alignment.center,
-              //         child: const Text("Home"),
-              //       ),
-              //     ),
-              //     Tab(
-              //       child: Container(
-              //         width: context.widthPct(.25),
-              //         alignment: Alignment.center,
-              //         child: const Text("Category"),
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              const CustomTapBar(
-                firstTapTitle: "Home",
-                secoundTapTitle: "Category",
-              ),
-
-              // SizedBox(height: context.heightPct(.02)),
-              // Expanded(
-              //   child: TabBarView(
-              //     controller: _tapController,
-              //     children: [
-              //       const HomeTapBarView(),
-              //       const CategoryTapBarView(),
-              //     ],
-              //   ),
-              // ),
-            ],
-          ),
-        ),
+            );
+          }
+          return const SizedBox();
+        },
       ),
     );
   }

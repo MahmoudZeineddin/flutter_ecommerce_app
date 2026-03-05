@@ -90,9 +90,11 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   Widget build(BuildContext context) {
     return PersistentTabView(
       controller: _controller,
+
       tabs: _tabs(),
       navBarBuilder: (NavBarConfig navBarBuilder) => Style6BottomNavBar(
         navBarConfig: navBarBuilder,
+
         navBarDecoration: NavBarDecoration(
           borderRadius: BorderRadius.circular(0),
           color: AppColors.scaffoldBackground,

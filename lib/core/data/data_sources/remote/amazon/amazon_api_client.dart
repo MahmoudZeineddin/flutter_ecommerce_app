@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_constants.dart';
+import 'package:flutter_ecommerce_app/core/data/models/category_model.dart';
 import 'package:flutter_ecommerce_app/core/data/models/product_model_new.dart';
 
 class AmazonApiClient {
@@ -11,10 +12,10 @@ class AmazonApiClient {
         baseUrl: 'https://${AppConstants.host}',
 
         connectTimeout: const Duration(
-          seconds: 10,
+          seconds: 30,
         ), // Time to open the connection
         receiveTimeout: const Duration(
-          seconds: 10,
+          seconds: 30,
         ), // Time to receive data chunks
         headers: {
           'X-RapidAPI-Key': AppConstants.apiKey,
@@ -24,15 +25,17 @@ class AmazonApiClient {
     );
   }
 
-  Future<ProductModel> fetchProducts() async {
+  Future<List<ProductModel>> fetchProducts() async {
     try {
-      final response = await _dio.get(
-        AppConstants.detailsEndpoint,
-        queryParameters: {'asin': 'B07ZPKBL9V', 'country': 'US'},
-      );
+      // final response = await _dio.get(
+      //   AppConstants.detailsEndpoint,
+      //   queryParameters: {'asin': 'B07ZPKBL9V', 'country': 'US'},
+      // );
 
-      final dataJson = response.data['data'] as Map<String, dynamic>;
-      return ProductModel.fromJson(dataJson);
+      // final dataJson = response.data['data'] as Map<String, dynamic>;
+      // return ProductModel.fromJson(dataJson);
+
+      return dummyProducts;
     } on DioException catch (e) {
       throw _handleError(e);
     }
@@ -46,17 +49,18 @@ class AmazonApiClient {
         1, // 'page': Enables pagination to load product sets in small chunks.
   }) async {
     try {
-      final response = await _dio.get(
-        AppConstants.searchEndpoint,
-        queryParameters: {
-          'query': query,
-          'country': country,
-          'page': page,
-          'sort_by': sortBy,
-        },
-      );
-      final products = response.data['data']['products'] as List;
-      return products.map((product) => ProductModel.fromJson(product)).toList();
+      //   final response = await _dio.get(
+      //     AppConstants.searchEndpoint,
+      //     queryParameters: {
+      //       'query': query,
+      //       'country': country,
+      //       'page': page,
+      //       'sort_by': sortBy,
+      //     },
+      //   );
+      //   final products = response.data['data']['products'] as List;
+      //   return products.map((product) => ProductModel.fromJson(product)).toList();
+      return dummyProducts;
     } on DioException catch (e) {
       throw _handleError(e);
     }
@@ -67,12 +71,13 @@ class AmazonApiClient {
     String country = 'US',
   }) async {
     try {
-      final response = await _dio.get(
-        AppConstants.bestSellersEndpoint,
-        queryParameters: {'category': category, 'country': country},
-      );
-      final products = response.data['data']['best_sellers'] as List;
-      return products.map((product) => ProductModel.fromJson(product)).toList();
+      // final response = await _dio.get(
+      //   AppConstants.bestSellersEndpoint,
+      //   queryParameters: {'category': category, 'country': country},
+      // );
+      // final products = response.data['data']['best_sellers'] as List;
+      // return products.map((product) => ProductModel.fromJson(product)).toList();
+      return dummyProducts;
     } on DioException catch (e) {
       throw _handleError(e);
     }
@@ -83,12 +88,41 @@ class AmazonApiClient {
     String country = 'US',
   }) async {
     try {
-      final response = await _dio.get(
-        AppConstants.bestSellersEndpoint,
-        queryParameters: {'category': category, 'country': country},
-      );
-      final products = response.data['data']['deals'] as List;
-      return products.map((product) => ProductModel.fromJson(product)).toList();
+      //   final response = await _dio.get(
+      //     AppConstants.dealsEndpoint,
+      //     queryParameters: {'category': category, 'country': country},
+      //   );
+      //   final data = response.data['data'];
+      //   print('deals data: $data');
+
+      //   final deals = (response.data['data']['deals'] as List?) ?? [];
+      //   return deals
+      //       .map(
+      //         (deal) => ProductModel(
+      //           asin: deal['product_asin'] ?? '',
+      //           productTitle: deal['deal_title'] ?? '',
+      //           productPhoto: deal['deal_photo'],
+      //           productPrice: (deal['deal_price']['amount'] as num).toDouble(),
+      //           productOriginalPrice: (deal['list_price']['amount'] as num)
+      //               .toDouble(),
+      //         ),
+      //       )
+      //       .toList();
+      return dummyProducts;
+    } on DioException catch (e) {
+      print("Error fetching deals: ${e.message}");
+      throw _handleError(e);
+    }
+  }
+
+  Future<List<CategoryModel>> fetchCategories() async {
+    try {
+      // final response = await _dio.get(AppConstants.categoriesEndpoint);
+      // final categories = response.data['data'] as List;
+      // return categories
+      //     .map((category) => CategoryModel.fromJson(category))
+      //     .toList();
+      return [];
     } on DioException catch (e) {
       throw _handleError(e);
     }

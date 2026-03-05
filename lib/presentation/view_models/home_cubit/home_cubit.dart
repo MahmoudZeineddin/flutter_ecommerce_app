@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_app/core/data/models/category_model.dart';
 import 'package:flutter_ecommerce_app/core/data/models/product_model_new.dart';
 
 import 'package:flutter_ecommerce_app/core/domain/repositories/product_repository.dart';
@@ -26,18 +27,30 @@ class HomeCubit extends Cubit<HomeState> {
   // }
 
   Future<void> loadHomeData() async {
+    if (state is HomeLoaded) return;
     emit(HomeLoading());
     try {
-      final results = await Future.wait([
-        _productRepository.getBestSellers(category: 'electronics'),
-        _productRepository.getDeals(category: 'electronics'),
-        _productRepository.searchProducts(query: 'trending', page: 1),
-      ]);
+      final bestSellersFuture = _productRepository.getBestSellers(
+        category: 'electronics',
+      );
+      final dealsFuture = _productRepository.getDeals(category: 'electronics');
+      final trendingFuture = _productRepository.searchProducts(
+        query: 'trending',
+        page: 1,
+      );
+      final categoriesFuture = _productRepository.getCategories();
+
+      final bestSellers = await bestSellersFuture;
+      final deals = await dealsFuture;
+      final trending = await trendingFuture;
+      final categories = await categoriesFuture;
+
       emit(
         HomeLoaded(
-          bestSellers: results[0],
-          deals: results[1],
-          trending: results[2],
+          bestSellers: bestSellers,
+          hotDeals: deals,
+          trending: trending,
+          categories: categories,
         ),
       );
     } catch (e) {

@@ -71,3 +71,26 @@ class ProductModel {
     return null;
   }
 }
+
+final List<ProductModel> dummyProducts = [
+  ProductModel(
+    asin: '1',
+    productTitle: 'Apple iPhone 15 Pro Max',
+    productPhoto:
+        'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400',
+    productPrice: 1099.99,
+    productOriginalPrice: 1299.99,
+    productStarRating: 4.8,
+    isBestSeller: true,
+  ),
+  ProductModel(
+    asin: '2',
+    productTitle: 'Apple MacBook Air M2',
+    productPhoto:
+        'https://images.unsplash.com/photo-1611186871525-2f18779ea7c0?w=400',
+    productPrice: 999.99,
+    productOriginalPrice: 1199.99,
+    productStarRating: 4.7,
+    isBestSeller: false,
+  ),
+];

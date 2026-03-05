@@ -1,14 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_app/core/data/models/product_model_new.dart';
 import 'package:flutter_ecommerce_app/core/extensions/context_extensions.dart';
 import 'package:flutter_ecommerce_app/core/themes/colors.dart';
-import 'package:flutter_ecommerce_app/core/data/models/product_model.dart';
+import 'package:flutter_ecommerce_app/core/widgets/image_error.dart';
+import 'package:flutter_ecommerce_app/core/widgets/image_placeholder.dart';
 import 'package:remixicon/remixicon.dart';
 
 class ProductItem extends StatelessWidget {
-  final ProductItemModel productItemModel;
+  final ProductModel productModel;
 
-  const ProductItem({super.key, required this.productItemModel});
+  const ProductItem({super.key, required this.productModel});
 
   @override
   Widget build(BuildContext context) {
@@ -16,26 +18,30 @@ class ProductItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
-          height: context.heightPct(.22),
+          height: context.heightPct(.18),
+          width: context.widthPct(.40),
+          // alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             color: AppColors.productItemBackground,
           ),
 
           child: Stack(
+            alignment: Alignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.all(context.heightPct(.024)),
-                child: CachedNetworkImage(
-                  imageUrl: productItemModel.imageUrl,
-                  height: context.heightPct(.30),
-                  fit: BoxFit.contain,
-                  placeholder: (context, url) =>
-                      const CircularProgressIndicator.adaptive(),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                padding: const EdgeInsets.all(6.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: CachedNetworkImage(
+                    imageUrl: productModel.productPhoto ?? "",
+                    height: context.heightPct(.20),
+                    fit: BoxFit.contain,
+                    placeholder: (context, url) => const ImagePlaceholder(),
+                    errorWidget: (context, url, error) => const ImageError(),
+                  ),
                 ),
               ),
-
               Positioned(
                 top: 8,
                 right: 8,
@@ -60,7 +66,7 @@ class ProductItem extends StatelessWidget {
         Text(
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          productItemModel.name,
+          productModel.productTitle.split(" ").take(3).join(" "),
           style: context.textTheme.labelLarge?.copyWith(
             fontWeight: FontWeight.bold,
           ),
@@ -70,17 +76,19 @@ class ProductItem extends StatelessWidget {
         Text(
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          productItemModel.brand,
+          productModel.isBestSeller ? '⭐ Best Seller' : 'Amazon',
           style: context.textTheme.labelSmall?.copyWith(
             color: AppColors.secondaryText,
           ),
         ),
 
         SizedBox(height: context.heightPct(.001)),
+
+        // product price
         Text(
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          "\$${productItemModel.price.toStringAsFixed(2)}",
+          "\$${productModel.productPrice.toStringAsFixed(2)}",
           style: context.textTheme.labelLarge?.copyWith(
             fontWeight: FontWeight.bold,
           ),

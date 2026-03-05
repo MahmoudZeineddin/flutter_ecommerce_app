@@ -1,4 +1,5 @@
 import 'package:flutter_ecommerce_app/core/data/data_sources/remote/amazon/amazon_api_client.dart';
+import 'package:flutter_ecommerce_app/core/data/models/category_model.dart';
 import 'package:flutter_ecommerce_app/core/data/models/product_model_new.dart';
 import 'package:flutter_ecommerce_app/core/domain/repositories/product_repository.dart';
 
@@ -63,5 +64,10 @@ class ProductRepositoryImpl implements ProductRepository {
     String country = 'US',
   }) async {
     return await _apiClient.fetchDeals(category: category, country: country);
+  }
+
+  @override
+  Future<List<CategoryModel>> getCategories() async {
+    return await _apiClient.fetchCategories();
   }
 }
