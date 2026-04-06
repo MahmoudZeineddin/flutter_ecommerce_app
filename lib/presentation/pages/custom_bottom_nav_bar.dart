@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_app/core/di/injection_container.dart';
 import 'package:flutter_ecommerce_app/core/themes/colors.dart';
+import 'package:flutter_ecommerce_app/presentation/pages/categories_page.dart';
 import 'package:flutter_ecommerce_app/presentation/pages/favorite_page.dart';
 import 'package:flutter_ecommerce_app/presentation/pages/home_page.dart';
 import 'package:flutter_ecommerce_app/presentation/pages/my_order_page.dart';
 import 'package:flutter_ecommerce_app/presentation/pages/profile_page.dart';
+import 'package:flutter_ecommerce_app/presentation/view_models/home_cubit/home_cubit.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:remixicon/remixicon.dart';
 
@@ -52,22 +56,28 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
           inactiveForegroundColor: AppColors.inactiveGrey,
         ),
       ),
+
       PersistentTabConfig(
-        screen: const MyOrderPage(),
+        screen: const CategoriesPage(),
         item: ItemConfig(
-          icon: Icon(_selectedIndex == 1 ? Remix.truck_fill : Remix.truck_line),
-          title: "My Order",
+          icon: Icon(
+            _selectedIndex == 1 ? Remix.function_fill : Remix.function_line,
+          ),
+          title: "Categories",
           activeForegroundColor: AppColors.primaryColor,
           inactiveForegroundColor: AppColors.inactiveGrey,
         ),
       ),
+
       PersistentTabConfig(
-        screen: const FavoritePage(),
+        screen: const MyOrderPage(),
         item: ItemConfig(
           icon: Icon(
-            _selectedIndex == 2 ? Remix.heart_3_fill : Remix.heart_3_line,
+            _selectedIndex == 2
+                ? Remix.shopping_bag_3_fill
+                : Remix.shopping_bag_3_line,
           ),
-          title: "Favorite",
+          title: "Orders",
           activeForegroundColor: AppColors.primaryColor,
           inactiveForegroundColor: AppColors.inactiveGrey,
         ),
@@ -88,39 +98,42 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    return PersistentTabView(
-      controller: _controller,
+    return BlocProvider(
+      create: (context) => sl<HomeCubit>()..loadHomeData(),
+      child: PersistentTabView(
+        controller: _controller,
 
-      tabs: _tabs(),
-      navBarBuilder: (NavBarConfig navBarBuilder) => Style6BottomNavBar(
-        navBarConfig: navBarBuilder,
+        tabs: _tabs(),
+        navBarBuilder: (NavBarConfig navBarBuilder) => Style6BottomNavBar(
+          navBarConfig: navBarBuilder,
 
-        navBarDecoration: NavBarDecoration(
-          borderRadius: BorderRadius.circular(0),
-          color: AppColors.scaffoldBackground,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 10,
-              offset: const Offset(0, -2),
-            ),
-          ],
+          navBarDecoration: NavBarDecoration(
+            borderRadius: BorderRadius.circular(0),
+            color: AppColors.scaffoldBackground,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 10,
+                offset: const Offset(0, -2),
+              ),
+            ],
+          ),
         ),
-      ),
-      screenTransitionAnimation: const ScreenTransitionAnimation(
-        curve: Curves.easeInOut,
-        duration: Duration(milliseconds: 400),
-      ),
+        screenTransitionAnimation: const ScreenTransitionAnimation(
+          curve: Curves.easeInOut,
+          duration: Duration(milliseconds: 400),
+        ),
 
-      onTabChanged: (int index) {
-        setState(() {
-          _selectedIndex = index;
-        });
-      },
-      backgroundColor: AppColors.scaffoldBackground,
-      handleAndroidBackButtonPress: true,
-      resizeToAvoidBottomInset: true,
-      stateManagement: true,
+        onTabChanged: (int index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        backgroundColor: AppColors.scaffoldBackground,
+        handleAndroidBackButtonPress: true,
+        resizeToAvoidBottomInset: true,
+        stateManagement: true,
+      ),
     );
   }
 }

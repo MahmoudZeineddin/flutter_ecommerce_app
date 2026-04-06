@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_ecommerce_app/core/data/models/category_model.dart';
 import 'package:flutter_ecommerce_app/core/data/models/product_model_new.dart';
 
 import 'package:flutter_ecommerce_app/core/domain/repositories/product_repository.dart';
@@ -50,9 +49,17 @@ class HomeCubit extends Cubit<HomeState> {
           bestSellers: bestSellers,
           hotDeals: deals,
           trending: trending,
-          categories: categories,
+          // categories: categories,
         ),
       );
+
+      // emit(
+      //   HomeLoaded(
+      //     bestSellers: dummyProducts,
+      //     hotDeals: dummyProducts,
+      //     trending: dummyProducts,
+      //   ),
+      // );
     } catch (e) {
       emit(HomeError(e.toString()));
     }

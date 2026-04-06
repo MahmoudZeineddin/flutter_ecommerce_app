@@ -11,13 +11,11 @@ final class HomeLoaded extends HomeState {
   final List<ProductModel> bestSellers;
   final List<ProductModel> hotDeals;
   final List<ProductModel> trending;
-  final List<CategoryModel> categories;
 
   HomeLoaded({
     required this.bestSellers,
     required this.hotDeals,
     required this.trending,
-    required this.categories,
   });
 }
 

@@ -15,24 +15,6 @@ class AppCategory {
   });
 }
 
-// const List<AppCategory> homeCategories = [
-//   AppCategory(name: 'All', searchQuery: 'all', icon: Remix.apps_line),
-//   AppCategory(
-//     name: 'Electronics',
-//     searchQuery: 'electronics',
-//     icon: Remix.computer_line,
-//   ),
-//   AppCategory(
-//     name: 'Clothing',
-//     searchQuery: 'clothing',
-//     icon: Remix.t_shirt_line,
-//   ),
-//   AppCategory(name: 'Shoes', searchQuery: 'shoes', icon: Remix.footprint_line),
-//   AppCategory(name: 'Beauty', searchQuery: 'beauty', icon: Remix.heart_line),
-//   AppCategory(name: 'Home', searchQuery: 'home decor', icon: Remix.home_line),
-//   AppCategory(name: 'Sports', searchQuery: 'sports', icon: Remix.football_line),
-// ];
-
 const List<AppCategory> homeCategories = [
   AppCategory(
     name: 'All',
@@ -78,54 +60,60 @@ const List<AppCategory> homeCategories = [
   ),
 ];
 
-// // const List<AppCategory> homeCategories = [
-//   AppCategory(
-//     name: 'All',
-//     searchQuery: 'all',
-//     icon: Remix.apps_line,
-//     imageUrl:
-//         'https://purepng.com/public/uploads/large/purepng.com-shopping-bagshopping-bagobjectsshopping-bag-17015283538466atux.png',
-//   ),
-//   AppCategory(
-//     name: 'Electronics',
-//     searchQuery: 'electronics',
-//     icon: Remix.computer_line,
-//     imageUrl:
-//         'https://purepng.com/public/uploads/large/purepng.com-macbookmacbooknotebookcomputersapple-incmacbook-family-17015283611449at26.png',
-//   ),
-//   AppCategory(
-//     name: 'Clothing',
-//     searchQuery: 'clothing',
-//     icon: Remix.t_shirt_line,
-//     imageUrl:
-//         'https://purepng.com/public/uploads/large/purepng.com-suitssuitscoat-and-trousersclothing-1701528322049dclre.png',
-//   ),
-//   AppCategory(
-//     name: 'Shoes',
-//     searchQuery: 'shoes',
-//     icon: Remix.footprint_line,
-//     imageUrl:
-//         'https://purepng.com/public/uploads/large/purepng.com-nike-shoes-for-mennike-shoes-for-mennike-shoes-for-mennike-shoesnike-1701528189569u6z7m.png',
-//   ),
-//   AppCategory(
-//     name: 'Beauty',
-//     searchQuery: 'beauty',
-//     icon: Remix.heart_line,
-//     imageUrl:
-//         'https://purepng.com/public/uploads/large/purepng.com-beauty-productbeauty-productcosmetic-itemsbeauty-face-powder-1701528221623pnt7z.png',
-//   ),
-//   AppCategory(
-//     name: 'Home',
-//     searchQuery: 'home decor',
-//     icon: Remix.home_line,
-//     imageUrl:
-//         'https://purepng.com/public/uploads/large/purepng.com-furniturefurniture-objectshome-furnishing-furniture-items-1701528353272nupru.png',
-//   ),
-//   AppCategory(
-//     name: 'Sports',
-//     searchQuery: 'sports',
-//     icon: Remix.football_line,
-//     imageUrl:
-//         'https://purepng.com/public/uploads/large/purepng.com-basketballbasketballballsports-equipmentbasketball-ball-1701528211025m84is.png',
-//   ),
-// ];
+const List<AppCategory> popularCollections = [
+  AppCategory(
+    name: 'Women Fashion',
+    searchQuery: 'women fashion',
+    icon: Remix.women_line,
+    imageUrl:
+        'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400',
+  ),
+  AppCategory(
+    name: 'Men Fashion',
+    searchQuery: 'men fashion',
+    icon: Remix.men_line,
+    imageUrl:
+        'https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=400',
+  ),
+  AppCategory(
+    name: 'Electronics',
+    searchQuery: 'electronics',
+    icon: Remix.computer_line,
+    imageUrl:
+        'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=400',
+  ),
+  AppCategory(
+    name: 'Beauty',
+    searchQuery: 'beauty',
+    icon: Remix.heart_line,
+    imageUrl:
+        'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400',
+  ),
+  AppCategory(
+    name: 'Sports',
+    searchQuery: 'sports',
+    icon: Remix.football_line,
+    imageUrl:
+        'https://images.unsplash.com/photo-1517649763962-0c623066013b?w=400',
+  ),
+  AppCategory(
+    name: 'Home & Kitchen',
+    searchQuery: 'home kitchen',
+    icon: Remix.home_line,
+    imageUrl: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400',
+  ),
+  AppCategory(
+    name: 'Kids Fashion',
+    searchQuery: 'kids fashion',
+    icon: Remix.bear_smile_line,
+    imageUrl:
+        'https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?w=400',
+  ),
+  AppCategory(
+    name: 'Accessories',
+    searchQuery: 'accessories',
+    icon: Remix.handbag_line,
+    imageUrl:
+        'https://images.unsplash.com/photo-1509941943102-10c232535736?w=400',
+  ),
+];

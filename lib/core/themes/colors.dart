@@ -10,6 +10,9 @@ class AppColors {
   static const Color productItemBackground = Color.fromARGB(255, 231, 231, 232);
   static const Color favoriteItemBackground = Color(0xFF797979);
 
+  static const Color discountBadgeBackground = Colors.redAccent;
+  static const Color white = Color(0xFFFFFFFF);
+
   // inactive taps
   static const Color inactiveGrey = Color(0xFFB1B1B1);
   static const Color errorRed = Color(0xFFE74C3C);

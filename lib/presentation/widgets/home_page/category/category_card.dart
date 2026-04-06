@@ -4,7 +4,6 @@ import 'package:flutter_ecommerce_app/common.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_categories.dart';
 import 'package:flutter_ecommerce_app/core/widgets/image_error.dart';
 import 'package:flutter_ecommerce_app/core/widgets/image_placeholder.dart';
-import 'package:shimmer/shimmer.dart';
 
 class CategoryCard extends StatelessWidget {
   final AppCategory appCategory;
@@ -20,8 +19,8 @@ class CategoryCard extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: context.widthPct(.18),
-          height: context.widthPct(.18),
+          width: context.widthPct(.2),
+          height: context.heightPct(.10),
           decoration: BoxDecoration(
             color: AppColors.productItemBackground,
             borderRadius: BorderRadius.circular(16),
@@ -37,8 +36,6 @@ class CategoryCard extends StatelessWidget {
                 width: double.infinity,
                 height: context.heightPct(.22),
               ),
-              // placeholder: (context, url) =>
-              //     const Center(child: CircularProgressIndicator.adaptive()),
               errorWidget: (context, url, error) => const ImageError(),
             ),
             // IconButton(
@@ -56,7 +53,7 @@ class CategoryCard extends StatelessWidget {
           style: AppTextStyles.body(
             context,
           ).copyWith(fontWeight: FontWeight.bold),
-          // .copyWith(fontSize: 11
+
           textAlign: TextAlign.center,
         ),
       ],
