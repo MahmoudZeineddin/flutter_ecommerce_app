@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/common.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_categories.dart';
+
 import 'package:flutter_ecommerce_app/presentation/widgets/home_page/category/category_card.dart';
 
 class CategoryList extends StatelessWidget {

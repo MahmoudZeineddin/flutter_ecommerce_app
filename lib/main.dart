@@ -11,7 +11,7 @@ Future<void> main() async {
   await dotenv.load(fileName: ".env");
   final apiClient = AmazonApiClient();
   await initializeDependencies();
-  apiClient.fetchProducts();
+  // apiClient.fetchProducts();
   runApp(const MyApp());
 }
 

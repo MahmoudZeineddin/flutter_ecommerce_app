@@ -44,22 +44,22 @@ class HomeCubit extends Cubit<HomeState> {
       final trending = await trendingFuture;
       final categories = await categoriesFuture;
 
-      emit(
-        HomeLoaded(
-          bestSellers: bestSellers,
-          hotDeals: deals,
-          trending: trending,
-          // categories: categories,
-        ),
-      );
-
       // emit(
       //   HomeLoaded(
-      //     bestSellers: dummyProducts,
-      //     hotDeals: dummyProducts,
-      //     trending: dummyProducts,
+      //     bestSellers: bestSellers,
+      //     hotDeals: deals,
+      //     trending: trending,
+      //     // categories: categories,
       //   ),
       // );
+
+      emit(
+        HomeLoaded(
+          bestSellers: dummyProducts,
+          hotDeals: dummyProducts,
+          trending: dummyProducts,
+        ),
+      );
     } catch (e) {
       emit(HomeError(e.toString()));
     }

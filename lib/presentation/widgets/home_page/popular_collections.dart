@@ -21,7 +21,7 @@ class PopularCollections extends StatelessWidget {
               width: double.infinity,
               height: double.infinity,
               fit: BoxFit.cover,
-              imageUrl: collection.imageUrl,
+              imageUrl: collection.imageUrl ?? '',
               placeholder: (context, url) => ImagePlaceholder(
                 width: double.infinity,
                 height: context.heightPct(.22),

@@ -1,9 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/common.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_categories.dart';
-import 'package:flutter_ecommerce_app/core/widgets/image_error.dart';
-import 'package:flutter_ecommerce_app/core/widgets/image_placeholder.dart';
 
 class CategoryCard extends StatelessWidget {
   final AppCategory appCategory;
@@ -28,23 +25,24 @@ class CategoryCard extends StatelessWidget {
           ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: CachedNetworkImage(
-              height: context.heightPct(.06),
-              fit: BoxFit.contain,
-              imageUrl: appCategory.imageUrl,
-              placeholder: (context, url) => ImagePlaceholder(
-                width: double.infinity,
-                height: context.heightPct(.22),
-              ),
-              errorWidget: (context, url, error) => const ImageError(),
-            ),
-            // IconButton(
-            //   icon: Icon(appCategory.icon, size: 30),
-            //   onPressed: () {
-            //     // appCategory.searchQuery;
-            //   },
-            //   color: AppColors.primaryColor,
-            // ),
+            child:
+                // CachedNetworkImage(
+                //   height: context.heightPct(.06),
+                //   fit: BoxFit.contain,
+                //   imageUrl: appCategory.imageUrl,
+                //   placeholder: (context, url) => ImagePlaceholder(
+                //     width: double.infinity,
+                //     height: context.heightPct(.22),
+                //   ),
+                //   errorWidget: (context, url, error) => const ImageError(),
+                // ),
+                IconButton(
+                  icon: Icon(appCategory.icon, size: 30),
+                  onPressed: () {
+                    // appCategory.searchQuery;
+                  },
+                  color: AppColors.primaryColor,
+                ),
           ),
         ),
         SizedBox(height: context.heightPct(.002)),
