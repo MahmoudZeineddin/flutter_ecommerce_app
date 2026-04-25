@@ -27,7 +27,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             body: Center(child: CircularProgressIndicator.adaptive()),
           );
         } else if (state is ProductDetailsLoaded) {
-          final product = state.productItemModel;
+          final product = state.productModel;
           state.totalPrice;
           return Scaffold(
             extendBodyBehindAppBar: true,
@@ -48,13 +48,13 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       vertical: context.widthPct(.25),
                     ),
                     child: CachedNetworkImage(
-                      imageUrl: product.imageUrl,
+                      imageUrl: product.productPhoto ?? '',
                       fit: BoxFit.contain,
                     ),
                   ),
                 ),
                 ProductDetailsSheet(
-                  product: product,
+                  productModel: product,
                   quantity: state.quantity,
                   onDecrement: () {
                     context.read<ProductsDetailsCubit>().updateQuantity(

@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_ecommerce_app/core/data/models/product_model_new.dart';
+import 'package:flutter_ecommerce_app/core/data/models/product_model.dart';
 
 import 'package:flutter_ecommerce_app/core/domain/repositories/product_repository.dart';
 part 'home_state.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter_ecommerce_app/core/data/data_sources/remote/amazon/amazon_api_client.dart';
 import 'package:flutter_ecommerce_app/core/data/models/category_model.dart';
-import 'package:flutter_ecommerce_app/core/data/models/product_model_new.dart';
+import 'package:flutter_ecommerce_app/core/data/models/product_model.dart';
 import 'package:flutter_ecommerce_app/core/domain/repositories/product_repository.dart';
 
 // connect the interface to the actual API client.

@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/common.dart';
+import 'package:flutter_ecommerce_app/core/data/models/product_details_model.dart';
+import 'package:flutter_ecommerce_app/core/data/models/product_model.dart';
 import 'package:flutter_ecommerce_app/presentation/view_models/product_details__cubit/product_details_cubit.dart';
 import 'package:flutter_ecommerce_app/presentation/widgets/details_page/quantity_contor.dart';
 import 'package:readmore/readmore.dart';
 
 class ProductDetailsSheet extends StatefulWidget {
-  final ProductItemModel product;
+  final ProductDetailsModel productDetailsModel;
   final int quantity;
   final VoidCallback onIncrement;
   final VoidCallback onDecrement;
   const ProductDetailsSheet({
     super.key,
-    required this.product,
+    required this.productDetailsModel,
     required this.quantity,
     required this.onIncrement,
     required this.onDecrement,
@@ -34,7 +36,7 @@ class _ProductDetailsSheetState extends State<ProductDetailsSheet> {
         decoration: BoxDecoration(shape: BoxShape.circle, color: color),
         child: InkWell(
           onTap: () {
-            context.read<ProductsDetailsCubit>().selectColor(color);
+            // context.read<ProductsDetailsCubit>().selectColor(color);
             // selectedColorIndex = (selectedColorIndex == index) ? -1 : index;
             //  add the color container logic and fix problem if the color was white how is shown in screen
           },
@@ -79,8 +81,11 @@ class _ProductDetailsSheetState extends State<ProductDetailsSheet> {
                         children: [
                           Text(
                             overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                            widget.product.name,
+                            maxLines: 1,
+                            widget.productDetailsModel.productTitle
+                                .split(' ')
+                                .take(3)
+                                .join(' '),
                             style: AppTextStyles.headingBigSize(context),
                           ),
                           Row(
@@ -92,14 +97,15 @@ class _ProductDetailsSheetState extends State<ProductDetailsSheet> {
                               ),
                               SizedBox(width: context.widthPct(.01)),
                               Text(
-                                widget.product.rating.toString(),
+                                widget.productDetailsModel.productStarRating
+                                    .toString(),
                                 style: AppTextStyles.headingSmallSize(context),
                               ),
                               SizedBox(width: context.widthPct(.01)),
-                              Text(
-                                '(${widget.product.numberOfReviews.toString()} Reviews)',
-                                style: AppTextStyles.subHeading(context),
-                              ),
+                              // Text(
+                              //   '(${widget.product.numberOfReviews.toString()} Reviews)',
+                              //   style: AppTextStyles.subHeading(context),
+                              // ),
                             ],
                           ),
                         ],
@@ -131,16 +137,16 @@ class _ProductDetailsSheetState extends State<ProductDetailsSheet> {
                         style: AppTextStyles.headingSmallSize(context),
                       ),
                       SizedBox(height: context.heightPct(.005)),
-                      Row(
-                        children: List.generate(
-                          widget.product.availableColors.length,
-                          (index) => _colorBox(
-                            context,
-                            widget.product.availableColors[index],
-                            index,
-                          ),
-                        ),
-                      ),
+                      // Row(
+                      //   children: List.generate(
+                      //     widget.product.availableColors.length,
+                      //     (index) => _colorBox(
+                      //       context,
+                      //       widget.product.availableColors[index],
+                      //       index,
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                   SizedBox(height: context.heightPct(.03)),
@@ -153,7 +159,7 @@ class _ProductDetailsSheetState extends State<ProductDetailsSheet> {
                       ),
                       SizedBox(height: context.heightPct(.01)),
                       ReadMoreText(
-                        widget.product.description,
+                        widget.productDetailsModel.aboutProduct.first,
                         trimLines: 4,
                         colorClickableText: AppColors.primaryColor,
                         trimMode: TrimMode.Line,

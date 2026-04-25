@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_constants.dart';
 import 'package:flutter_ecommerce_app/core/data/models/category_model.dart';
-import 'package:flutter_ecommerce_app/core/data/models/product_model_new.dart';
+import 'package:flutter_ecommerce_app/core/data/models/product_model.dart';
 
 class AmazonApiClient {
   late final Dio _dio;
@@ -121,8 +121,8 @@ class AmazonApiClient {
 
   Future<List<CategoryModel>> fetchCategories() async {
     try {
-      // final response = await _dio.get(AppConstants.categoriesEndpoint);
-      // final categories = response.data['data'] as List;
+      final response = await _dio.get(AppConstants.categoriesEndpoint);
+      final categories = response.data['data'] as List;
       // return categories
       //     .map((category) => CategoryModel.fromJson(category))
       //     .toList();

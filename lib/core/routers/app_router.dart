@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_app/core/data/models/product_model.dart';
 import 'package:flutter_ecommerce_app/core/routers/app_routes.dart';
 import 'package:flutter_ecommerce_app/presentation/view_models/product_details__cubit/product_details_cubit.dart';
 import 'package:flutter_ecommerce_app/presentation/pages/product_details_page.dart';
@@ -17,16 +18,16 @@ class AppRouter {
         }
 
       case AppRoutes.productDetailsRoute:
-        final String productId = settings.arguments as String;
+        final ProductModel product = settings.arguments as ProductModel;
         return MaterialPageRoute(
           settings: settings,
           builder: (context) => BlocProvider(
             create: (context) {
               final cubit = ProductsDetailsCubit();
-              cubit.getProductDetails(productId);
+              cubit.getProductDetails(product.asin);
               return cubit;
             },
-            child: ProductDetailsPage(productId: productId),
+            child: ProductDetailsPage(productId: product.asin),
           ),
         );
 

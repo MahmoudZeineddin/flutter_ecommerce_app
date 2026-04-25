@@ -7,29 +7,29 @@ final class ProductsDetailsInitial extends ProductsDetailsState {}
 final class ProductDetailsLoading extends ProductsDetailsState {}
 
 final class ProductDetailsLoaded extends ProductsDetailsState {
-  final ProductItemModel productItemModel;
+  final ProductDetailsModel productDetailsModel;
   final int quantity;
   final double totalPrice;
-  final Color selectedColor;
+  // final Color selectedColor;
 
   ProductDetailsLoaded({
-    required this.productItemModel,
+    required this.productDetailsModel,
     required this.quantity,
     required this.totalPrice,
-    required this.selectedColor,
+    // required this.selectedColor,
   });
 
   ProductDetailsLoaded copyWith({
     int? quantity,
     double? totalPrice,
-    ProductItemModel? productItemModel,
-    Color? selectedColor,
+    ProductDetailsModel? productModel,
+    // Color? selectedColor,
   }) {
     return ProductDetailsLoaded(
-      productItemModel: productItemModel ?? this.productItemModel,
+      productDetailsModel: productModel ?? productDetailsModel,
       quantity: quantity ?? this.quantity,
       totalPrice: totalPrice ?? this.totalPrice,
-      selectedColor: selectedColor ?? this.selectedColor,
+      // selectedColor: selectedColor ?? this.selectedColor,
     );
   }
 }

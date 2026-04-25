@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/common.dart';
-import 'package:flutter_ecommerce_app/core/data/models/product_model_new.dart';
+import 'package:flutter_ecommerce_app/core/data/models/product_model.dart';
+import 'package:flutter_ecommerce_app/core/routers/app_routes.dart';
 import 'package:flutter_ecommerce_app/presentation/widgets/home_page/prdouct/product_item.dart';
 import 'package:flutter_ecommerce_app/core/widgets/title_section.dart';
 
@@ -31,7 +32,17 @@ class ProductSection extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               final product = products[index];
-              return ProductItem(productModel: product);
+              return InkWell(
+                onTap: () => {
+                  Navigator.pushNamed(
+                    context,
+                    AppRoutes.productDetailsRoute,
+                    arguments: product,
+                  ),
+                },
+
+                child: ProductItem(productModel: product),
+              );
             },
             padding: EdgeInsets.only(left: 4, right: context.widthPct(.15)),
             separatorBuilder: (context, index) =>
