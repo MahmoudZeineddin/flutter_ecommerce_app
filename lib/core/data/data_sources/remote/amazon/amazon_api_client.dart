@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_ecommerce_app/core/constants/app_constants.dart';
 import 'package:flutter_ecommerce_app/core/data/models/category_model.dart';
+import 'package:flutter_ecommerce_app/core/data/models/product_details_model.dart';
 import 'package:flutter_ecommerce_app/core/data/models/product_model.dart';
 
 class AmazonApiClient {
@@ -39,6 +40,19 @@ class AmazonApiClient {
     } on DioException catch (e) {
       return ProductModel(asin: '', productTitle: '', productPrice: 0.0);
       // throw _handleError(e);
+    }
+  }
+
+  Future<ProductDetailsModel> getProductDetails(String asin) async {
+    try {
+      final response = await _dio.get(
+        AppConstants.detailsEndpoint,
+        queryParameters: {'asin': asin, 'country': 'US'},
+      );
+      final dataJson = response.data['data'] as Map<String, dynamic>;
+      return ProductDetailsModel.fromJson(dataJson);
+    } on DioException catch (e) {
+      throw _handleError(e);
     }
   }
 

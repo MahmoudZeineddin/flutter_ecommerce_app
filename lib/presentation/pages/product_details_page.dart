@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/common.dart';
+import 'package:flutter_ecommerce_app/core/data/models/product_details_model.dart';
 import 'package:flutter_ecommerce_app/presentation/view_models/product_details__cubit/product_details_cubit.dart';
 import 'package:flutter_ecommerce_app/core/widgets/custom_app_bar.dart';
 import 'package:flutter_ecommerce_app/presentation/widgets/details_page/product_details_sheet.dart';
@@ -15,7 +16,6 @@ class ProductDetailsPage extends StatefulWidget {
   State<ProductDetailsPage> createState() => _ProductDetailsPageState();
 }
 
-// make the quanty of product just 6 in maxamm
 class _ProductDetailsPageState extends State<ProductDetailsPage> {
   @override
   Widget build(BuildContext context) {
@@ -27,45 +27,53 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             body: Center(child: CircularProgressIndicator.adaptive()),
           );
         } else if (state is ProductDetailsLoaded) {
-          final product = state.productModel;
+          final product = state.productDetailsModel;
           state.totalPrice;
           return Scaffold(
             extendBodyBehindAppBar: true,
             appBar: CustomAppBar(title: 'Product item', onPressed: () {}),
             bottomNavigationBar: ProductPurchaseBar(price: state.totalPrice),
 
-            body: Stack(
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: context.heightPct(.50),
-                  decoration: const BoxDecoration(
-                    color: AppColors.productItemBackground,
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: context.heightPct(.04),
-                      vertical: context.widthPct(.25),
-                    ),
-                    child: CachedNetworkImage(
-                      imageUrl: product.productPhoto ?? '',
-                      fit: BoxFit.contain,
-                    ),
-                  ),
+            /*
+Normal widget → "I am 300px tall, that's it"
+Sliver        → "I am 300px tall, and I know the user 
+                  has scrolled 120px so far"
+*/
+            body: CustomScrollView(
+              // ← the scroll engine, owns all gestures
+              slivers: [
+                SliverToBoxAdapter(
+                  // ← wraps a normal widget into a Sliver
+                  child: _ProductImageSlider(
+                    product: product,
+                  ), // normal widget → becomes scroll-aware
                 ),
-                ProductDetailsSheet(
-                  productModel: product,
-                  quantity: state.quantity,
-                  onDecrement: () {
-                    context.read<ProductsDetailsCubit>().updateQuantity(
-                      state.quantity - 1,
-                    );
-                  },
-                  onIncrement: () {
-                    context.read<ProductsDetailsCubit>().updateQuantity(
-                      state.quantity + 1,
-                    );
-                  },
+
+                SliverToBoxAdapter(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.scaffoldBackground,
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(context.heightPct(.03)),
+                      child: ProductDetailsSheet(
+                        // normal widget → becomes scroll-aware
+                        productDetails: product,
+                        quantity: state.quantity,
+                        onDecrement: () {
+                          context.read<ProductsDetailsCubit>().updateQuantity(
+                            state.quantity - 1,
+                          );
+                        },
+                        onIncrement: () {
+                          context.read<ProductsDetailsCubit>().updateQuantity(
+                            state.quantity + 1,
+                          );
+                        },
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -81,6 +89,92 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           return const SizedBox.shrink();
         }
       },
+    );
+  }
+}
+
+class _ProductImageSlider extends StatefulWidget {
+  final ProductDetailsModel product;
+  const _ProductImageSlider({required this.product});
+
+  @override
+  State<_ProductImageSlider> createState() => _ProductImageSliderState();
+}
+
+class _ProductImageSliderState extends State<_ProductImageSlider> {
+  int _currentIndex = 0;
+
+  // Combine single photo + photos list, remove duplicates
+  List<String> get _images {
+    final all = <String>{};
+    if (widget.product.productPhoto != null) {
+      all.add(widget.product.productPhoto!);
+    }
+    all.addAll(widget.product.productPhotos);
+    return all.toList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final images = _images;
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 30),
+      child: Container(
+        width: double.infinity,
+        height: context.heightPct(.45),
+        color: AppColors.productItemBackground,
+        child: Stack(
+          children: [
+            // Images
+            PageView.builder(
+              itemCount: images.isEmpty ? 1 : images.length,
+              onPageChanged: (index) => setState(() => _currentIndex = index),
+              itemBuilder: (context, index) {
+                final url = images.isEmpty ? '' : images[index];
+                return Padding(
+                  padding: EdgeInsets.all(context.heightPct(.05)),
+                  child: CachedNetworkImage(
+                    imageUrl: url,
+                    fit: BoxFit.contain,
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator.adaptive(),
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.image_not_supported),
+                  ),
+                );
+              },
+            ),
+
+            // Dot indicators — only show if more than 1 image
+            if (images.length > 1)
+              Positioned(
+                bottom: 40,
+                left: 0,
+                right: 0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    images.length,
+                    (index) => AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      margin: const EdgeInsets.symmetric(horizontal: 3),
+                      width: _currentIndex == index ? 16 : 6,
+                      height: 6,
+                      decoration: BoxDecoration(
+                        color: _currentIndex == index
+                            ? AppColors.primaryColor
+                            : AppColors.inactiveGrey,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
     );
   }
 }

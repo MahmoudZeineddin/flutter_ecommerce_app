@@ -15,18 +15,24 @@ class _ProductPurchaseBarState extends State<ProductPurchaseBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: context.heightPct(0.12),
+      height: context.heightPct(0.10),
       padding: EdgeInsets.symmetric(
-        horizontal: context.widthPct(0.05),
-        vertical: 10,
+        horizontal: context.widthPct(0.06),
+        vertical: 12,
       ),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppColors.scaffoldBackground,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(30),
           topRight: Radius.circular(30),
         ),
-        //
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 20,
+            offset: const Offset(0, -5),
+          ),
+        ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -35,31 +41,29 @@ class _ProductPurchaseBarState extends State<ProductPurchaseBar> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                width: context.widthPct(.30),
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: RichText(
-                    text: TextSpan(
-                      style: AppTextStyles.bigSize(context),
-                      children: [
-                        const TextSpan(
-                          text: '\$ ',
-                          style: TextStyle(color: AppColors.primaryColor),
-                        ),
-                        TextSpan(text: widget.price.toString()),
-                      ],
-                    ),
-                  ),
+              Text(
+                'Total Price',
+                style: AppTextStyles.body(
+                  context,
+                  color: AppColors.secondaryText,
+                ),
+              ),
+              Text(
+                '\$ ${widget.price.toStringAsFixed(2)}',
+                style: TextStyle(
+                  fontSize: AppTextStyles.headingBigSize(context).fontSize,
+                  fontWeight: AppTextStyles.headingBigSize(context).fontWeight,
+                  color: AppColors.primaryColor,
                 ),
               ),
             ],
           ),
+
           CustomButton(
             text: 'Add to Cart',
             onPressed: () => {},
             icon: RemixIcons.shopping_bag_4_line,
-            width: context.widthPct(0.50),
+            width: context.widthPct(.50),
           ),
         ],
       ),

@@ -10,26 +10,22 @@ final class ProductDetailsLoaded extends ProductsDetailsState {
   final ProductDetailsModel productDetailsModel;
   final int quantity;
   final double totalPrice;
-  // final Color selectedColor;
 
   ProductDetailsLoaded({
     required this.productDetailsModel,
     required this.quantity,
     required this.totalPrice,
-    // required this.selectedColor,
   });
 
   ProductDetailsLoaded copyWith({
     int? quantity,
     double? totalPrice,
-    ProductDetailsModel? productModel,
-    // Color? selectedColor,
+    ProductDetailsModel? productDetailsModel,
   }) {
     return ProductDetailsLoaded(
-      productDetailsModel: productModel ?? productDetailsModel,
+      productDetailsModel: productDetailsModel ?? this.productDetailsModel,
       quantity: quantity ?? this.quantity,
       totalPrice: totalPrice ?? this.totalPrice,
-      // selectedColor: selectedColor ?? this.selectedColor,
     );
   }
 }

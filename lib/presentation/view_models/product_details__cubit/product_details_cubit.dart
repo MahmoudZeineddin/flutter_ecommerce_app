@@ -15,44 +15,28 @@ class ProductsDetailsCubit extends Cubit<ProductsDetailsState> {
   void getProductDetails(String id) {
     emit(ProductDetailsLoading());
     Future.delayed(const Duration(seconds: 2), () {
-      // selectedProduct = dummyProductDetails.firstWhere(
-      //   (product) => product.asin == id,
-      // );
-
-      // dummyProducts.firstWhere(
-      //   (product) => product.asin == id,
-      // );
       emit(
         ProductDetailsLoaded(
           productDetailsModel: dummyProductDetails,
           quantity: quantity,
-          totalPrice: selectedProduct!.productPrice,
-          // selectedColor: selectedProduct!.availableColors.first,
+          totalPrice: dummyProductDetails.productPrice * quantity,
         ),
       );
     });
   }
 
   void updateQuantity(int newQuantity) {
-    if (state is ProductDetailsLoaded) {
+    if (state is ProductDetailsLoaded && newQuantity >= 1 && newQuantity <= 6) {
       final currentState = state as ProductDetailsLoaded;
       quantity = newQuantity;
-      if (newQuantity >= 1) {
-        emit(
-          currentState.copyWith(
-            quantity: newQuantity,
-            totalPrice:
-                currentState.productDetailsModel.productPrice * newQuantity,
-          ),
-        );
-      }
+
+      emit(
+        currentState.copyWith(
+          quantity: newQuantity,
+          totalPrice:
+              currentState.productDetailsModel.productPrice * newQuantity,
+        ),
+      );
     }
   }
-
-  // void selectColor(Color color) {
-  //   if (state is ProductDetailsLoaded) {
-  //     final currentState = state as ProductDetailsLoaded;
-  //     emit(currentState.copyWith(selectedColor: color));
-  //   }
-  // }
 }

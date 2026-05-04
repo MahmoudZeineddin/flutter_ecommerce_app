@@ -6,7 +6,7 @@ class AppTextStyles {
       context.textTheme.displaySmall?.copyWith(
         fontWeight: fontWeigth ?? FontWeight.bold,
         color: AppColors.primaryColor,
-        overflow: TextOverflow.ellipsis,
+        // overflow: TextOverflow.ellipsis,
       ) ??
       const TextStyle();
 
@@ -17,7 +17,7 @@ class AppTextStyles {
       context.textTheme.titleLarge?.copyWith(
         fontWeight: fontWeigth ?? FontWeight.bold,
         color: AppColors.mainText,
-        overflow: TextOverflow.ellipsis,
+        // overflow: TextOverflow.ellipsis,
       ) ??
       const TextStyle();
 
@@ -25,7 +25,7 @@ class AppTextStyles {
       context.textTheme.titleMedium?.copyWith(
         fontWeight: FontWeight.bold,
         color: AppColors.mainText,
-        overflow: TextOverflow.ellipsis,
+        // overflow: TextOverflow.ellipsis,
       ) ??
       const TextStyle();
 
@@ -33,14 +33,14 @@ class AppTextStyles {
       context.textTheme.titleMedium?.copyWith(
         fontWeight: FontWeight.w500,
         color: AppColors.secondaryText,
-        overflow: TextOverflow.ellipsis,
+        // overflow: TextOverflow.ellipsis,
       ) ??
       const TextStyle();
 
   static TextStyle body(BuildContext context, {Color? color}) =>
       context.textTheme.titleSmall?.copyWith(
         color: color ?? AppColors.mainText,
-        overflow: TextOverflow.ellipsis,
+        // overflow: TextOverflow.ellipsis,
         //  maxLines: 1,
       ) ??
       const TextStyle();

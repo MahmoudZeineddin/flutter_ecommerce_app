@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/common.dart';
 import 'package:flutter_ecommerce_app/core/data/models/product_details_model.dart';
-import 'package:flutter_ecommerce_app/core/data/models/product_model.dart';
-import 'package:flutter_ecommerce_app/presentation/view_models/product_details__cubit/product_details_cubit.dart';
 import 'package:flutter_ecommerce_app/presentation/widgets/details_page/quantity_contor.dart';
 import 'package:readmore/readmore.dart';
 
 class ProductDetailsSheet extends StatefulWidget {
-  final ProductDetailsModel productDetailsModel;
+  final ProductDetailsModel productDetails;
   final int quantity;
   final VoidCallback onIncrement;
   final VoidCallback onDecrement;
   const ProductDetailsSheet({
     super.key,
-    required this.productDetailsModel,
+    required this.productDetails,
     required this.quantity,
     required this.onIncrement,
     required this.onDecrement,
@@ -26,28 +23,69 @@ class ProductDetailsSheet extends StatefulWidget {
 
 class _ProductDetailsSheetState extends State<ProductDetailsSheet> {
   int selectedColorIndex = -1;
-  Widget _colorBox(BuildContext context, Color color, int index) {
-    bool isClicked = selectedColorIndex == index;
-    return Padding(
-      padding: EdgeInsets.only(right: context.widthPct(.05)),
-      child: Container(
-        width: context.widthPct(.08),
-        height: context.heightPct(.05),
-        decoration: BoxDecoration(shape: BoxShape.circle, color: color),
-        child: InkWell(
-          onTap: () {
-            // context.read<ProductsDetailsCubit>().selectColor(color);
-            // selectedColorIndex = (selectedColorIndex == index) ? -1 : index;
-            //  add the color container logic and fix problem if the color was white how is shown in screen
-          },
-          child: isClicked
-              ? const Icon(
-                  RemixIcons.check_fill,
-                  color: AppColors.scaffoldBackground,
-                )
-              : null,
+
+  Widget _buildTitleRow(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                widget.productDetails.productTitle.split(' ').take(3).join(' '),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: AppTextStyles.headingBigSize(context),
+              ),
+              if (widget.productDetails.productByline != null)
+                Text(
+                  widget.productDetails.productByline!,
+                  style: AppTextStyles.subHeading(context),
+                ),
+              if (widget.productDetails.productStarRating != null)
+                Row(
+                  children: [
+                    Icon(
+                      RemixIcons.star_fill,
+                      color: AppColors.starReating,
+                      size: context.widthPct(.04),
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      widget.productDetails.productStarRating!.toStringAsFixed(
+                        1,
+                      ),
+                      style: AppTextStyles.headingSmallSize(context),
+                    ),
+                    if (widget.productDetails.productNumRatings != null) ...[
+                      const SizedBox(width: 4),
+                      Text(
+                        '(${widget.productDetails.productNumRatings})',
+                        style: AppTextStyles.subHeading(context),
+                      ),
+                    ],
+                  ],
+                ),
+            ],
+          ),
         ),
-      ),
+        Column(
+          children: [
+            QuantityCounter(
+              quantity: widget.quantity,
+              onDecrement: widget.onDecrement,
+              onIncrement: widget.onIncrement,
+            ),
+            SizedBox(height: context.heightPct(.007)),
+            Text(
+              widget.productDetails.productAvailability ?? 'In Stock',
+              style: AppTextStyles.body(context),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
@@ -56,133 +94,101 @@ class _ProductDetailsSheetState extends State<ProductDetailsSheet> {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(height: context.heightPct(.40)),
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: AppColors.scaffoldBackground,
-              borderRadius: BorderRadius.circular(40),
-            ),
-            child: Padding(
-              padding: EdgeInsets.only(
-                top: context.heightPct(.03),
-                left: context.heightPct(.03),
-                right: context.heightPct(.03),
-                bottom: context.heightPct(.02),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          Text(
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            widget.productDetailsModel.productTitle
-                                .split(' ')
-                                .take(3)
-                                .join(' '),
-                            style: AppTextStyles.headingBigSize(context),
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                RemixIcons.star_fill,
-                                color: AppColors.starReating,
-                                size: context.widthPct(.05),
-                              ),
-                              SizedBox(width: context.widthPct(.01)),
-                              Text(
-                                widget.productDetailsModel.productStarRating
-                                    .toString(),
-                                style: AppTextStyles.headingSmallSize(context),
-                              ),
-                              SizedBox(width: context.widthPct(.01)),
-                              // Text(
-                              //   '(${widget.product.numberOfReviews.toString()} Reviews)',
-                              //   style: AppTextStyles.subHeading(context),
-                              // ),
-                            ],
-                          ),
-                        ],
-                      ),
-
-                      Column(
-                        children: [
-                          QuantityCounter(
-                            quantity: widget.quantity,
-                            onDecrement: widget.onDecrement,
-                            onIncrement: widget.onIncrement,
-                          ),
-                          SizedBox(height: context.heightPct(.007)),
-                          Text(
-                            'Avaliable in stock',
-                            style: AppTextStyles.body(context),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: context.heightPct(.03)),
-
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Colors",
-                        style: AppTextStyles.headingSmallSize(context),
-                      ),
-                      SizedBox(height: context.heightPct(.005)),
-                      // Row(
-                      //   children: List.generate(
-                      //     widget.product.availableColors.length,
-                      //     (index) => _colorBox(
-                      //       context,
-                      //       widget.product.availableColors[index],
-                      //       index,
-                      //     ),
-                      //   ),
-                      // ),
-                    ],
-                  ),
-                  SizedBox(height: context.heightPct(.03)),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Description",
-                        style: AppTextStyles.headingSmallSize(context),
-                      ),
-                      SizedBox(height: context.heightPct(.01)),
-                      ReadMoreText(
-                        widget.productDetailsModel.aboutProduct.first,
-                        trimLines: 4,
-                        colorClickableText: AppColors.primaryColor,
-                        trimMode: TrimMode.Line,
-                        trimCollapsedText: 'Read more',
-                        trimExpandedText: ' Read less',
-                        moreStyle: AppTextStyles.body(
-                          context,
-                          color: AppColors.primaryColor,
-                        ),
-                        lessStyle: AppTextStyles.body(
-                          context,
-                          color: AppColors.primaryColor,
-                        ),
-                        style: AppTextStyles.body(context),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
+          _buildTitleRow(context),
+          SizedBox(height: context.heightPct(.03)),
+          _buildBadges(context),
+          SizedBox(height: context.heightPct(.03)),
+          _buildDescription(context),
+          // _buildPriceRow(context),
+          SizedBox(height: context.heightPct(.03)),
+          _buildAboutProduct(context),
         ],
       ),
+    );
+  }
+
+  Widget _badge(BuildContext context, String label, Color color) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.15),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: color, width: 0.5),
+      ),
+      child: Text(label, style: AppTextStyles.body(context, color: color)),
+    );
+  }
+
+  Widget _buildBadges(BuildContext context) {
+    // Only render if at least one badge is true
+    if (!widget.productDetails.isBestSeller && !widget.productDetails.isPrime) {
+      return const SizedBox.shrink();
+    }
+    return Wrap(
+      spacing: 8,
+      children: [
+        if (widget.productDetails.isBestSeller)
+          _badge(context, 'Best Seller', AppColors.starReating),
+        if (widget.productDetails.isPrime)
+          _badge(context, 'Prime', AppColors.primaryColor),
+      ],
+    );
+  }
+
+  Widget _buildDescription(BuildContext context) {
+    if (widget.productDetails.productDescription == null)
+      return const SizedBox.shrink();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Description', style: AppTextStyles.headingSmallSize(context)),
+        SizedBox(height: context.heightPct(.01)),
+        ReadMoreText(
+          widget.productDetails.productDescription!,
+          trimLines: 4,
+          trimMode: TrimMode.Line,
+          trimCollapsedText: 'Read more',
+          trimExpandedText: ' Read less',
+          colorClickableText: AppColors.primaryColor,
+          style: AppTextStyles.body(context),
+          moreStyle: AppTextStyles.body(context, color: AppColors.primaryColor),
+          lessStyle: AppTextStyles.body(context, color: AppColors.primaryColor),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildAboutProduct(BuildContext context) {
+    if (widget.productDetails.aboutProduct.isEmpty)
+      return const SizedBox.shrink();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'About this product',
+          style: AppTextStyles.headingSmallSize(context),
+        ),
+        SizedBox(height: context.heightPct(.01)),
+        ...widget.productDetails.aboutProduct.map(
+          (point) => Padding(
+            padding: const EdgeInsets.only(bottom: 6),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  '• ',
+                  style: TextStyle(color: AppColors.primaryColor),
+                ),
+                Expanded(
+                  child: Text(point, style: AppTextStyles.body(context)),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

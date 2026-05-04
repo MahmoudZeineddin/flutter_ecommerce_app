@@ -1,3 +1,19 @@
+/*
+The reality: It's NOT wrong. It's a design pattern called:
+
+DTO — Data Transfer Object
+
+The idea is simple:
+
+The real product in Amazon's database has 50+ fields
+Your list screen only needs 5-6 fields
+Your detail screen needs 20+ fields
+
+So you create two "views" of the same product — not two different products.
+ 
+ and to safe meomory and avoid unneccessary data fetching, we will create two models:
+ */
+
 class ProductDetailsModel {
   final String asin;
   final String productTitle;
@@ -88,11 +104,11 @@ final dummyProductDetails = ProductDetailsModel(
   productAvailability: "In Stock",
   isBestSeller: true,
   isPrime: true,
-  productPhoto: "https://example.com/macbook_main.jpg",
+  productPhoto: "https://picsum.photos/id/180/800/600",
   productPhotos: [
-    "https://example.com/macbook_main.jpg",
-    "https://example.com/macbook_side.jpg",
-    "https://example.com/macbook_keyboard.jpg",
+    "https://picsum.photos/id/180/800/600",
+    "https://picsum.photos/id/119/800/600",
+    "https://picsum.photos/id/160/800/600",
   ],
   aboutProduct: [
     "Apple-designed M1 chip for a giant leap in CPU, GPU, and machine learning performance",
