@@ -31,7 +31,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           state.totalPrice;
           return Scaffold(
             extendBodyBehindAppBar: true,
-            appBar: CustomAppBar(title: 'Product item', onPressed: () {}),
+            appBar: CustomAppBar(title: '', onPressed: () {}),
             bottomNavigationBar: ProductPurchaseBar(price: state.totalPrice),
 
             /*

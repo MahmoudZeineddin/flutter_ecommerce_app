@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/core/data/models/product_model.dart';
+import 'package:flutter_ecommerce_app/core/di/injection_container.dart';
+import 'package:flutter_ecommerce_app/core/domain/repositories/product_repository.dart';
 import 'package:flutter_ecommerce_app/core/routers/app_routes.dart';
 import 'package:flutter_ecommerce_app/presentation/view_models/product_details__cubit/product_details_cubit.dart';
 import 'package:flutter_ecommerce_app/presentation/pages/product_details_page.dart';
@@ -23,7 +25,9 @@ class AppRouter {
           settings: settings,
           builder: (context) => BlocProvider(
             create: (context) {
-              final cubit = ProductsDetailsCubit();
+              final cubit = ProductsDetailsCubit(
+                sl<ProductRepository>(),
+              ); 
               cubit.getProductDetails(product.asin);
               return cubit;
             },

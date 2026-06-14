@@ -1,4 +1,5 @@
 import 'package:flutter_ecommerce_app/core/data/models/category_model.dart';
+import 'package:flutter_ecommerce_app/core/data/models/product_details_model.dart';
 import 'package:flutter_ecommerce_app/core/data/models/product_model.dart';
 
 // what data we need
@@ -27,7 +28,7 @@ abstract class ProductRepository {
     String country = 'US',
   });
 
-  Future<ProductModel> getProductDetails({
+  Future<ProductDetailsModel> getProductDetails({
     required String asin,
     String country = 'US',
   });

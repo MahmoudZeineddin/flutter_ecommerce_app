@@ -12,7 +12,7 @@ class ProductItem extends StatelessWidget {
 
   const ProductItem({super.key, required this.productModel});
 
-  Widget _DiscountBadge(BuildContext context, int discountPercentage) {
+  Widget _discountBadge(BuildContext context, int discountPercentage) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
@@ -67,7 +67,7 @@ class ProductItem extends StatelessWidget {
                 Positioned(
                   top: 8,
                   left: 8,
-                  child: _DiscountBadge(
+                  child: _discountBadge(
                     context,
                     productModel.discountPercentage!.toInt(),
                   ),

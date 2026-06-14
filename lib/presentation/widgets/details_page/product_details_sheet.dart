@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/common.dart';
 import 'package:flutter_ecommerce_app/core/data/models/product_details_model.dart';
 import 'package:flutter_ecommerce_app/presentation/widgets/details_page/quantity_contor.dart';
-import 'package:readmore/readmore.dart';
+// import 'package:readmore/readmore.dart';
 
 class ProductDetailsSheet extends StatefulWidget {
   final ProductDetailsModel productDetails;
@@ -138,23 +138,25 @@ class _ProductDetailsSheetState extends State<ProductDetailsSheet> {
   }
 
   Widget _buildDescription(BuildContext context) {
-    if (widget.productDetails.productDescription == null)
+    if (widget.productDetails.productDescription == null) {
       return const SizedBox.shrink();
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('Description', style: AppTextStyles.headingSmallSize(context)),
         SizedBox(height: context.heightPct(.01)),
-        ReadMoreText(
+        // ReadMoreText(
+        Text(
           widget.productDetails.productDescription!,
-          trimLines: 4,
-          trimMode: TrimMode.Line,
-          trimCollapsedText: 'Read more',
-          trimExpandedText: ' Read less',
-          colorClickableText: AppColors.primaryColor,
+          // trimLines: 4,
+          // trimMode: TrimMode.Line,
+          // trimCollapsedText: 'Read more',
+          // trimExpandedText: ' Read less',
+          // colorClickableText: AppColors.primaryColor,
           style: AppTextStyles.body(context),
-          moreStyle: AppTextStyles.body(context, color: AppColors.primaryColor),
-          lessStyle: AppTextStyles.body(context, color: AppColors.primaryColor),
+          // moreStyle: AppTextStyles.body(context, color: AppColors.primaryColor),
+          // lessStyle: AppTextStyles.body(context, color: AppColors.primaryColor),
         ),
       ],
     );

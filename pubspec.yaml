@@ -19,7 +19,7 @@ dependencies:
   flutter_dotenv: ^6.0.0
   get_it: ^9.2.0
   persistent_bottom_nav_bar_v2: ^6.2.0
-  readmore: ^3.0.0
+  # readmore: ^3.0.0
   remixicon: ^1.4.1
   shimmer: ^3.0.0
 dev_dependencies:

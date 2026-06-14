@@ -4,25 +4,31 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter_ecommerce_app/common.dart';
 import 'package:flutter_ecommerce_app/core/data/models/product_details_model.dart';
 import 'package:flutter_ecommerce_app/core/data/models/product_model.dart';
+import 'package:flutter_ecommerce_app/core/domain/repositories/product_repository.dart';
 
 part 'product_details_state.dart';
 
 class ProductsDetailsCubit extends Cubit<ProductsDetailsState> {
+  final ProductRepository _productRepository;
   ProductModel? selectedProduct;
   int quantity = 1;
-  ProductsDetailsCubit() : super(ProductsDetailsInitial());
+  ProductsDetailsCubit(this._productRepository)
+    : super(ProductsDetailsInitial());
 
-  void getProductDetails(String id) {
+  void getProductDetails(String id) async {
     emit(ProductDetailsLoading());
-    Future.delayed(const Duration(seconds: 2), () {
+    try {
+      final details = await _productRepository.getProductDetails(asin: id);
       emit(
         ProductDetailsLoaded(
-          productDetailsModel: dummyProductDetails,
+          productDetailsModel: details,
           quantity: quantity,
-          totalPrice: dummyProductDetails.productPrice * quantity,
+          totalPrice: details.productPrice * quantity,
         ),
       );
-    });
+    } catch (e) {
+      emit(ProductDetailsError(message: 'Failed to load product details'));
+    }
   }
 
   void updateQuantity(int newQuantity) {

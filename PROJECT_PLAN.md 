@@ -1,0 +1,1033 @@
+# 🛒 Kutuku E-Commerce MVP — Complete Plan
+
+**Start Date:** Tuesday, Feb 10, 2026  
+**Demo Target:** Week 9 (Mid-April 2026)  
+**Total Duration:** 10 weeks (including Week 0 prep)
+
+---
+
+## 📋 Executive Summary
+
+### Mission
+
+Build a production-ready e-commerce MVP with real Amazon API, modern UX, complete auth, and professional code quality.
+
+### Core Deliverables
+
+1. ✅ Real-time Amazon product data (Amazon Real-Time Data API)
+2. ✅ Clean Architecture (Repository Pattern)
+3. ✅ Modern UI/UX (researched from top apps)
+4. ✅ Multi-Auth: Email + Google Sign-In
+5. ✅ Guest Cart → Auth Cart migration
+6. ✅ Favorites (Firestore sync)
+7. ✅ RTL support (ar/en) + Dark mode
+8. ✅ Debug APK for testing
+
+### Non-Deliverables (Post-MVP)
+
+- Payment integration
+- Facebook Auth
+- AI Carousel feature
+- Publishing to stores
+
+---
+
+## 📚 Skills Overview
+
+### 🔧 Flutter Skills (Weekly — 1.5 hrs each)
+
+| Week   | Skill                     | Resource                                                  |
+| ------ | ------------------------- | --------------------------------------------------------- |
+| **W0** | Git Workflow              | [Git Course](https://www.youtube.com/watch?v=Q6G-J54vgKc) |
+| **W1** | Flutter Debugging         | Flutter DevTools Docs                                     |
+| **W2** | JSON Parsing Pro          | Dart Null Safety Docs                                     |
+| **W3** | Error Handling            | Flutter Best Practices                                    |
+| **W4** | Firebase Best Practices   | Firebase Official Docs                                    |
+| **W5** | Performance Optimization  | Flutter Performance Docs                                  |
+| **W6** | State Management Patterns | Bloc Documentation                                        |
+| **W7** | — (Light week)            | —                                                         |
+| **W8** | — (Eid Rest)              | —                                                         |
+| **W9** | Deployment Basics         | Flutter Deployment Docs                                   |
+
+---
+
+### 🎯 Priority Engineer Skills (Evening — Flexible)
+
+#### **AI Fundamentals** (Weeks: 1, 3, 5)
+
+- Week 1: Understanding ChatGPT + ML Basics (2.5 hrs)
+- Week 3: Machine Learning Parts 2-3 (2.5 hrs)
+- Week 5: Large Language Models (2 hrs)
+
+**Resource:** [DataCamp AI Track](https://app.datacamp.com/learn/skill-tracks/ai-fundamentals)
+
+---
+
+#### **Design Principles** (Weeks: 2, 4, 6, 9)
+
+- Week 2: Encapsulation, Coupling, DRY (1.5 hrs)
+- Week 4: SOLID Principles P1 (1.5 hrs)
+- Week 6: SOLID Principles P2 (1.5 hrs)
+- Week 9: Patterns + Review (1 hr)
+
+**Resource:** [YouTube Playlist](https://www.youtube.com/playlist?list=PL4n1Qos4Tb6ThSyydEJTm7xJ3qEwE8Oyu)
+
+---
+
+## 📅 Complete Timeline
+
+```
+Week 0: Feb 8-9 (Sun-Mon) — Pre-Flight: Git Mastery
+Week 1: Feb 10-15 (Tue-Sun) — Foundation: API + Home Sections
+Week 2: Feb 16-22 — Search + Product Details + Onboarding
+Week 3: Feb 23 - Mar 1 — Firebase Auth
+Week 4: Mar 2-8 — Favorites + Category Navigation
+Week 5: Mar 9-15 — Guest Cart + Variations
+Week 6: Mar 16-22 — Cart Migration + Checkout (🕌 Ramadan starts Mar 19)
+Week 7: Mar 23-29 — Light Polish + Testing (Ramadan)
+Week 8: Mar 30 - Apr 5 — 🕌 Eid Rest
+Week 9: Apr 6-12 — Final Polish + Debug APK
+
+🎉 MVP Demo: Apr 12, 2026
+```
+
+---
+
+## 📅 Weekly Learning Schedule
+
+```
+السبت: Coding (6-day work week)
+الأحد: Coding + Evening Learning (Priority Skill — flexible)
+الإثنين: Coding + Evening Learning
+الثلاثاء: Coding + Evening Learning
+الأربعاء: Coding + Evening Learning
+الخميس: Coding + Evening Learning
+الجمعة: 🛑 إجازة كاملة (Complete Rest)
+```
+
+**Notes:**
+
+- Flutter Skill = أهدف أسبوعي (1.5 hrs) — **أنت تختار الوقت المناسب** خلال الأسبوع
+- Priority Skills = أهداف أسبوعية (distribute 1-2.5 hrs across evenings when convenient)
+- Coding = 6 أيام (السبت-الخميس)
+- No fixed daily schedule — complete when convenient
+
+---
+
+## 🎯 Key Principles
+
+1. **MVP Focus:** 80% value with 20% features
+2. **Quality > Speed:** Ramadan-aware pacing
+3. **Code First:** Coding tasks > Learning (learning is bonus)
+4. **RTL from Day 1:** No refactoring later
+5. **Flexible Learning:** Weekly goals, not daily obligations
+6. **You Control Timing:** Learn skills when convenient during the week
+
+---
+
+## 📝 Week-by-Week Breakdown
+
+---
+
+### Week 0: Pre-Flight (Feb 8-9)
+
+**Theme:** Git Mastery + Project Setup  
+**Coding Hours:** 7 total  
+**Days:** Sunday-Monday (2 days only)
+
+#### 🎯 Goals
+
+- [x] Complete remaining Git course
+- [x] Setup kutuku-mvp GitHub repository
+- [x] First commit with proper structure
+
+---
+
+#### 🔧 Flutter Skill: Git Workflow (3.5 hrs this week)
+
+**📖 Resource:** [Git Course (continue from 2:30:00)](https://www.youtube.com/watch?v=Q6G-J54vgKc)
+
+**Topics to Complete:**
+
+- Remote repositories (push, pull, fetch)
+- Branching strategies (feature branches)
+- Merge conflicts resolution
+- GitHub workflow (PR, issues)
+- `.gitignore` best practices
+
+**When to learn:** Complete before Feb 10 (choose your time)
+
+---
+
+#### 📝 Setup Tasks (7 hrs)
+
+**Git Practice (1 hr)**
+
+- [x] Create test repository
+- [x] Practice commits and branches
+- [ ] Practice merge workflow
+
+**Project Setup (2 hrs)**
+
+- [x] Create Flutter project
+- [x] Setup kutuku-mvp GitHub repository
+- [x] Configure .gitignore
+- [x] First commit
+
+**README (1 hr)**
+
+- [ ] Create README.md with project overview
+- [ ] Add tech stack section
+- [ ] Add planned features section
+- [ ] Add architecture approach section
+
+---
+
+### Week 1: Foundation (Feb 10-15)
+
+**Theme:** API Integration + Home Sections  
+**Coding Hours:** 17 total (6 days: Tue-Sun)  
+**Status:** Pre-Ramadan (full capacity)
+
+#### 🎯 Goals
+
+- [x] Real Amazon API integration working
+- [x] Repository Pattern implemented
+- [ ] Home sections: Best Sellers, Trending, Deals, Prime
+- [x] Reusable widgets created
+- [ ] RTL-ready code from Day 1
+
+---
+
+#### 🔧 Flutter Skill: Debugging (1.5 hrs this week)
+
+**📖 Resource:** Flutter DevTools Official Docs + VS Code Practice
+
+**Topics:**
+
+- Flutter DevTools intro (Inspector, Network, Logs)
+- Breakpoints in VS Code
+- Network inspector for API debugging
+- `print()` vs `debugPrint()` vs `log()`
+- Call stack navigation
+
+**Application:** Debug API integration issues
+
+**When to learn:** Anytime during Feb 10-15 (choose your time)
+
+---
+
+#### 🎯 Priority Skill: AI Fundamentals (2.5 hrs this week)
+
+**📖 Resource:** [DataCamp AI Track](https://app.datacamp.com/learn/skill-tracks/ai-fundamentals)
+
+**Weekly Goal:**
+
+- Understanding ChatGPT (finish remaining part)
+- Understanding Machine Learning (Part 1 — Basics)
+
+**Topics:**
+
+- What is Machine Learning
+- Supervised vs Unsupervised Learning
+- Training & Testing Data
+- Model Evaluation Basics
+
+**Schedule:** Distribute 2-3 hrs across evenings (flexible)
+
+---
+
+#### 📝 Coding Tasks (17 hrs)
+
+**Setup (30 min)**
+
+- [x] Add required packages to pubspec
+- [x] Create .env file with API keys
+- [x] Add .env to .gitignore
+
+**API Layer (3.5 hrs)**
+
+- [x] Create AmazonApiClient
+- [x] Create ProductRepository interface
+- [x] Implement ProductRepository
+- [x] Update ProductItemModel with Amazon fields
+- [x] Create parsing utilities
+- [x] Test API response parsing
+
+**State Management (30 min)**
+
+- [x] Update HomeCubit to fetch real products
+
+**Home Sections (5 hrs)**
+
+- [x] Create Best Sellers section
+- [x] Create Trending section
+- [x] Create Hot Deals section
+- [ ] Create Prime section
+- [x] create popule colocttions section
+
+**UI Components (2.5 hrs)**
+
+- [x] Extract SectionHeader widget
+- [x] Extract ProductCard widget
+- [x] Setup AppColors
+- [x] Setup AppTextStyles
+
+**Buffer:** 5 hrs for unexpected issues
+
+---
+
+### Week 2: Search + Details (Feb 16-22)
+
+**Theme:** Search with Debouncing + Product Details V2  
+**Coding Hours:** 19 total (6 days: Mon-Sat)  
+**Status:** Pre-Ramadan (full capacity)
+
+#### 🎯 Goals
+
+- [ ] Search with 500ms debouncing working
+- [ ] Modern Product Details page complete
+- [ ] Splash Screen + Onboarding ready
+
+---
+
+#### 🔧 Flutter Skill: JSON Parsing Pro (1.5 hrs this week)
+
+**📖 Resource:** Dart Null Safety Docs + Try-Catch Best Practices
+
+**Topics:**
+
+- Null safety patterns (`??`, `?.`, `!`)
+- When to use force unwrap safely
+- Try-catch in `fromJson()` methods
+- Handle missing/null fields from API
+- `json_serializable` overview
+
+**Application:** Robust parsing in data models
+
+**When to learn:** Anytime during Feb 16-22 (choose your time)
+
+---
+
+#### 🎯 Priority Skill: Design Principles (1.5 hrs this week)
+
+**📖 Resource:** [YouTube Playlist](https://www.youtube.com/playlist?list=PL4n1Qos4Tb6ThSyydEJTm7xJ3qEwE8Oyu)
+
+**Weekly Goal:**
+
+- Video 1: Encapsulate What Varies (30 min)
+- Video 2: Loose vs Tight Coupling (30 min)
+- Video 3: DRY Principle (30 min)
+
+**Key Takeaways:**
+
+- Isolate changing parts
+- Depend on interfaces, not implementations
+- Don't repeat yourself
+
+**Schedule:** Distribute 1.5 hrs across evenings (flexible)
+
+---
+
+#### 📝 Coding Tasks (19 hrs)
+
+**Search Feature (3.5 hrs)**
+
+- [ ] Create SearchRepository
+- [ ] Create SearchCubit with debouncing
+- [ ] Build SearchPage UI
+- [ ] Add empty state for search
+
+**Product Details V2 (6 hrs)**
+
+- [ ] Create PageView image slider
+- [ ] Add dot indicator for slider
+- [ ] Add floating heart icon for favorites
+- [ ] Create pricing display section
+- [ ] Add Reviews section with mock data
+- [ ] Add Offers section with mock data
+- [ ] Create bottom action bar
+- [ ] Add search bar in AppBar
+
+**Onboarding (3 hrs)**
+
+- [ ] Create SplashScreen
+- [ ] Create OnboardingPage with 3 slides
+- [ ] Setup navigation wiring
+
+**Buffer:** 6.5 hrs for unexpected issues
+
+---
+
+### Week 3: Auth (Feb 23 - Mar 1)
+
+**Theme:** Firebase Auth (Email + Google Sign-In)  
+**Coding Hours:** 17 total (6 days: Sun-Fri)  
+**Status:** Pre-Ramadan (full capacity)
+
+#### 🎯 Goals
+
+- [ ] Firebase setup complete
+- [ ] Email/Password auth working
+- [ ] Google Sign-In integrated
+- [ ] ❌ NO Facebook (moved to Post-MVP)
+
+---
+
+#### 🔧 Flutter Skill: Error Handling (1.5 hrs this week)
+
+**📖 Resource:** Flutter Error Handling Best Practices
+
+**Topics:**
+
+- Custom exception classes
+- User-friendly error messages
+- Try-catch patterns in Cubit
+- Emit error states properly
+- Retry logic for network failures
+
+**Application:** Implement in AuthCubit
+
+**When to learn:** Anytime during Feb 23 - Mar 1 (choose your time)
+
+---
+
+#### 🎯 Priority Skill: AI Fundamentals (2.5 hrs this week)
+
+**📖 Resource:** [DataCamp AI Track](https://app.datacamp.com/learn/skill-tracks/ai-fundamentals)
+
+**Weekly Goal:**
+
+- Understanding Machine Learning (Parts 2-3)
+
+**Topics:**
+
+- Classification vs Regression
+- Decision Trees & Random Forests
+- Neural Networks Intro
+- Overfitting & Underfitting
+
+**Schedule:** Distribute 2-3 hrs across evenings (flexible)
+
+---
+
+#### 📝 Coding Tasks (17 hrs)
+
+**Firebase Setup (40 min)**
+
+- [ ] Add Firebase packages
+- [ ] Setup Firebase project
+- [ ] Download config files
+- [ ] Run flutterfire configure
+
+**Auth Repository (1 hr)**
+
+- [ ] Create AuthRepository interface
+- [ ] Implement AuthRepository
+
+**UI Pages (3 hrs)**
+
+- [ ] Create LoginPage UI
+- [ ] Create CreateAccountPage UI
+
+**Email Verification (1 hr)**
+
+- [ ] Implement email verification flow
+- [ ] Add resend email functionality
+
+**Google Sign-In (2 hrs)**
+
+- [ ] Setup Google Sign-In
+- [ ] Configure Android SHA-1
+- [ ] Configure iOS URL scheme
+- [ ] Test sign-in flow
+
+**Integration (2 hrs)**
+
+- [ ] Wire auth flow navigation
+- [ ] Implement auth state persistence
+
+**Buffer:** 7.5 hrs for unexpected issues
+
+---
+
+### Week 4: Favorites (Mar 2-8)
+
+**Theme:** Favorites with Firestore + Category Navigation  
+**Coding Hours:** 17 total (6 days: Sat-Thu)  
+**Status:** Pre-Ramadan (full capacity)
+
+#### 🎯 Goals
+
+- [ ] Favorites feature with Firestore sync
+- [ ] Category page two-level navigation
+- [ ] User must be logged in for favorites
+
+---
+
+#### 🔧 Flutter Skill: Firebase Best Practices (1.5 hrs this week)
+
+**📖 Resource:** Firebase Official Docs + Best Practices
+
+**Topics:**
+
+- Firestore security rules
+- Efficient queries (limit, indexing, pagination)
+- Offline persistence
+- Real-time listeners vs one-time reads
+- Batched writes for multiple operations
+
+**Application:** Secure favorites collection
+
+**When to learn:** Anytime during Mar 2-8 (choose your time)
+
+---
+
+#### 🎯 Priority Skill: Design Principles (1.5 hrs this week)
+
+**📖 Resource:** [YouTube Playlist](https://www.youtube.com/playlist?list=PL4n1Qos4Tb6ThSyydEJTm7xJ3qEwE8Oyu)
+
+**Weekly Goal:**
+
+- Video 4: SOLID - Single Responsibility Principle (30 min)
+- Video 5: SOLID - Open/Closed Principle (30 min)
+- Video 6: SOLID - Liskov Substitution Principle (30 min)
+
+**Key Takeaways:**
+
+- Each class has one reason to change
+- Open for extension, closed for modification
+- Subtypes must be substitutable
+
+**Schedule:** Distribute 1.5 hrs across evenings (flexible)
+
+---
+
+#### 📝 Coding Tasks (17 hrs)
+
+**Firestore Setup (10 min)**
+
+- [ ] Add cloud_firestore package
+
+**Favorites Repository (1 hr)**
+
+- [ ] Create FavoriteRepository
+- [ ] Implement add/remove/get/stream methods
+
+**Favorites Cubit (1 hr)**
+
+- [ ] Create FavoriteCubit
+- [ ] Implement toggle favorite
+- [ ] Setup real-time stream
+
+**Wire Favorite Toggle (30 min)**
+
+- [ ] Wire heart icon on ProductCard
+- [ ] Add BlocBuilder for favorite state
+
+**Favorites Page (2 hrs)**
+
+- [ ] Create FavoritePage UI
+- [ ] Fetch products by ASINs
+- [ ] Add GridView layout
+- [ ] Add empty state
+
+**Category Page (2 hrs)**
+
+- [ ] Create CategoryPage UI
+- [ ] Implement two-level navigation
+- [ ] Add main categories grid
+- [ ] Add subcategories grid
+
+**Polish (2 hrs)**
+
+- [ ] Add loading indicators
+- [ ] Add error handling
+
+**Buffer:** 8.5 hrs for unexpected issues
+
+---
+
+### Week 5: Guest Cart (Mar 9-15)
+
+**Theme:** Local Cart + Product Variations  
+**Coding Hours:** 17 total (6 days: Fri-Wed)  
+**Status:** Pre-Ramadan (full capacity)
+
+#### 🎯 Goals
+
+- [ ] Guest cart with Hive local storage
+- [ ] Product variations (color/size)
+- [ ] Update README.md
+
+---
+
+#### 🔧 Flutter Skill: Performance Optimization (1.5 hrs this week)
+
+**📖 Resource:** Flutter Performance Best Practices
+
+**Topics:**
+
+- `const` constructors
+- Lazy loading with `ListView.builder`
+- Avoiding rebuilds
+- `CachedNetworkImage` for images
+- Profile mode testing
+
+**Application:** Add `const` everywhere possible
+
+**When to learn:** Anytime during Mar 9-15 (choose your time)
+
+---
+
+#### 🎯 Priority Skill: AI Fundamentals (2 hrs this week)
+
+**📖 Resource:** [DataCamp AI Track](https://app.datacamp.com/learn/skill-tracks/ai-fundamentals)
+
+**Weekly Goal:**
+
+- Large Language Models (LLMs) Concepts
+
+**Topics:**
+
+- What are LLMs
+- How LLMs work (transformers, attention)
+- GPT architecture basics
+- Prompt engineering fundamentals
+- LLM limitations & biases
+
+**Schedule:** Distribute 2 hrs across evenings (flexible)
+
+---
+
+#### 📝 Coding Tasks (17 hrs)
+
+**Local Storage Setup (10 min)**
+
+- [ ] Add hive packages
+
+**Cart Repository (1 hr)**
+
+- [ ] Create CartRepository
+- [ ] Implement local storage methods
+
+**Cart Cubit (1 hr)**
+
+- [ ] Create CartCubit
+- [ ] Implement load/add/update/remove
+
+**Wire Add to Cart (30 min)**
+
+- [ ] Wire "Add to Cart" button
+
+**Cart Page UI (2 hrs)**
+
+- [ ] Create CartPage UI
+- [ ] Add list items view
+- [ ] Add quantity controls
+- [ ] Add total calculation
+- [ ] Add checkout button
+
+**Product Variations (3 hrs)**
+
+- [ ] Create color selector
+- [ ] Fetch new ASIN for selected color
+- [ ] Create size selector
+- [ ] Show size availability
+- [ ] Disable out of stock options
+
+**README Update (1 hr)**
+
+- [ ] Update features section
+- [ ] Update architecture section
+- [ ] Add setup instructions
+
+**Buffer:** 8.5 hrs for unexpected issues
+
+---
+
+### Week 6: Integration (Mar 16-22)
+
+**Theme:** Cart Migration + Checkout + Error States  
+**Coding Hours:** 15 total (6 days: Thu-Tue)  
+**Status:** 🕌 Ramadan starts Mar 19 (reduced pace mid-week)
+
+#### 🎯 Goals
+
+- [ ] Migrate local cart → Firestore on login
+- [ ] Basic checkout structure (NO payment)
+- [ ] Error states implemented
+
+---
+
+#### 🔧 Flutter Skill: State Management Patterns (1.5 hrs this week)
+
+**📖 Resource:** Bloc Documentation + Best Practices
+
+**Topics:**
+
+- When to use Cubit vs Bloc
+- State immutability (`copyWith` pattern)
+- BlocProvider vs RepositoryProvider
+- BlocBuilder vs BlocListener vs BlocConsumer
+- Avoiding memory leaks
+
+**Application:** Review all Cubits for best practices
+
+**When to learn:** Anytime during Mar 16-22 (choose your time)
+
+---
+
+#### 🎯 Priority Skill: Design Principles (1.5 hrs this week)
+
+**📖 Resource:** [YouTube Playlist](https://www.youtube.com/playlist?list=PL4n1Qos4Tb6ThSyydEJTm7xJ3qEwE8Oyu)
+
+**Weekly Goal:**
+
+- Video 7: SOLID - Interface Segregation Principle (30 min)
+- Video 8: SOLID - Dependency Inversion Principle (30 min)
+- Video 9: Composition over Inheritance (30 min)
+
+**Key Takeaways:**
+
+- Don't force classes to implement unused methods
+- Depend on abstractions, not concrete classes
+- Prefer "has-a" over "is-a" relationships
+
+**Schedule:** Distribute 1.5 hrs across evenings (Ramadan-friendly pace)
+
+---
+
+#### 📝 Coding Tasks (15 hrs)
+
+**Cart Migration (2 hrs)**
+
+- [ ] Implement cart migration logic on login
+- [ ] Merge local and Firestore carts
+- [ ] Handle quantity conflicts
+
+**Checkout Page (2 hrs)**
+
+- [ ] Create CheckoutPage UI
+- [ ] Add order summary
+- [ ] Add placeholder address section
+- [ ] Add placeholder payment section
+- [ ] Add disabled "Place Order" button
+
+**Empty States (1 hr)**
+
+- [ ] Add Search empty state
+- [ ] Add Cart empty state
+- [ ] Add Favorites empty state
+
+**Network Error Widget (1 hr)**
+
+- [ ] Create network error widget
+- [ ] Add retry button
+- [ ] Add offline indicator
+
+**Manual Testing (4 hrs)**
+
+- [ ] Test full user flow
+- [ ] Test cart migration
+- [ ] Test error scenarios
+- [ ] Fix bugs found during testing
+
+**Buffer:** 4 hrs for unexpected issues
+
+**Note:** Reduced hours due to Ramadan starting Mar 19
+
+---
+
+### Week 7: Light Polish (Mar 23-29)
+
+**Theme:** Performance + Minor Features  
+**Coding Hours:** 12 total (6 days: Wed-Mon)  
+**Status:** 🕌 Full Ramadan Week (reduced pace)
+
+#### 🎯 Goals
+
+- [ ] Performance optimization
+- [ ] Store page basic UI
+- [ ] Profile page basic UI
+- [ ] Code cleanup
+
+---
+
+#### 🔧 Flutter Skill: No new skill this week
+
+**Focus:** Apply previous skills (Performance from Week 5)
+
+---
+
+#### 🎯 Priority Skill: No new skill this week
+
+**Focus:** Light week for Ramadan
+
+---
+
+#### 📝 Coding Tasks (12 hrs)
+
+**Performance (2 hrs)**
+
+- [ ] Audit and add `const` keywords
+- [ ] Verify CachedNetworkImage usage
+- [ ] Test performance in profile mode
+
+**Store Page (2 hrs)**
+
+- [ ] Create StorePage UI
+- [ ] Add brand info section
+- [ ] Add seller details section
+
+**Profile Page (2 hrs)**
+
+- [ ] Create ProfilePage UI
+- [ ] Add user info section
+- [ ] Add logout button
+
+**Code Cleanup (2 hrs)**
+
+- [ ] Remove unused imports
+- [ ] Format code
+- [ ] Add missing comments
+- [ ] Review code structure
+
+**Buffer:** 4 hrs for unexpected issues
+
+**Note:** Lightest week due to Ramadan
+
+---
+
+### Week 8: Eid Rest (Mar 30 - Apr 5)
+
+**Theme:** 🕌 Eid al-Fitr Celebration  
+**Coding Hours:** 0  
+**Status:** Complete Rest
+
+#### 🎯 Goal
+
+🛑 **Complete rest** — no coding, no learning
+
+#### Optional (if energized)
+
+- [ ] 15-min review of Week 9 goals
+
+**Enjoy Eid! 🌙✨**
+
+---
+
+### Week 9: Final Polish (Apr 6-12)
+
+**Theme:** Language + Dark Mode + Debug APK  
+**Coding Hours:** 20 total (6 days: Sat-Thu)  
+**Status:** Post-Eid (refreshed energy)
+
+#### 🎯 Goals
+
+- [ ] RTL + Language (ar/en) working
+- [ ] Dark mode implemented
+- [ ] Debug APK ready for testing
+- [ ] README polished
+
+---
+
+#### 🔧 Flutter Skill: Deployment Basics (1.5 hrs this week)
+
+**📖 Resource:** Flutter Deployment Docs
+
+**Topics:**
+
+- Build modes (debug vs release)
+- App signing (Android keystore)
+- Build APK
+- Build App Bundle
+- Testing on real device
+- Version management
+
+**Application:** Build debug APK for final demo
+
+**When to learn:** Anytime during Apr 6-12 (choose your time)
+
+---
+
+#### 🎯 Priority Skill: Design Principles (1 hr this week)
+
+**📖 Resource:** [YouTube Playlist](https://www.youtube.com/playlist?list=PL4n1Qos4Tb6ThSyydEJTm7xJ3qEwE8Oyu)
+
+**Weekly Goal:**
+
+- Video 10: Design Patterns Introduction (30 min)
+- Video 11: Practical Application & Review (30 min)
+
+**Key Takeaways:**
+
+- Common design patterns
+- When to apply patterns
+- Review all 11 principles learned
+
+**Schedule:** Distribute 1 hr across evenings (flexible)
+
+---
+
+#### 📝 Coding Tasks (20 hrs)
+
+**RTL + Language (3 hrs)**
+
+- [ ] Setup easy_localization package
+- [ ] Create ar/en JSON files
+- [ ] Test RTL layout
+- [ ] Translate key strings
+
+**Dark Mode (2 hrs)**
+
+- [ ] Create dark ThemeData
+- [ ] Add theme toggle in settings
+- [ ] Test dark mode on all screens
+
+**README Polish (1 hr)**
+
+- [ ] Add screenshots
+- [ ] Add architecture diagram
+- [ ] Update setup guide
+- [ ] Add features showcase
+
+**Build & Test (4 hrs)**
+
+- [ ] Build debug APK
+- [ ] Test on physical device (Android)
+- [ ] Test on physical device (iOS if available)
+- [ ] Test on emulator
+- [ ] Fix build/runtime issues
+
+**Final Polish (5 hrs)**
+
+- [ ] UI polish (spacing, typography, colors)
+- [ ] Fix minor bugs
+- [ ] Add missing loading indicators
+- [ ] Improve error messages
+- [ ] Final UX review
+
+**Buffer:** 5 hrs for unexpected issues
+
+---
+
+## 🎉 MVP DEMO READY: April 12, 2026
+
+---
+
+## 📋 Post-MVP Tasks (No Timeline — Plan After Week 9)
+
+### Tasks List
+
+- [ ] **UX/UI Crash Course** (Coursera/Udemy — 10 hrs)
+- [ ] **App UX Audit** (review 5 screens, apply improvements)
+- [ ] **Facebook Auth** (if client requires — 3 hrs)
+- [ ] **AI Carousel Feature** (generate banners with ChatGPT/Midjourney)
+- [ ] **Professional README** (cover image, demo GIF, lessons learned)
+- [ ] **Portfolio Case Study** (write-up for job applications)
+- [ ] **Payment Gateway** (Stripe/PayPal integration — Phase 2)
+- [ ] **Store Submission** (Google Play + App Store)
+- [ ] **Complete AI Track** (Generative AI + Ethics courses)
+
+**You'll create your own timeline after Week 9 demo.**
+
+---
+
+## ⚠️ Critical Reminders
+
+### 1. Security First
+
+- ✅ Use `flutter_dotenv` from Week 1
+- ✅ Add `.env` to `.gitignore` immediately
+- ✅ NEVER commit API keys
+
+### 2. RTL from Day 1
+
+- ✅ Use `Padding.symmetric` / `.directional`
+- ✅ Use `EdgeInsetsDirectional` instead of `EdgeInsets`
+- ✅ Test with Arabic locale early
+
+### 3. Guest Cart Strategy
+
+- ✅ Week 5: Local storage (Hive)
+- ✅ Week 6: Migration to Firestore on login
+- ✅ Why: Better UX, higher conversion
+
+### 4. Learning is Flexible
+
+- ✅ Code first, learn second
+- ✅ Weekly goals, not daily obligations
+- ✅ **You decide when to learn** during the week
+- ✅ Friday = complete rest
+
+### 5. Ramadan Adjustments
+
+- ✅ Week 6-7: Reduced hours (12-15 hrs/week)
+- ✅ Week 8: Complete Eid rest
+- ✅ Quality > Speed
+
+---
+
+## 🧘 Anxiety Management
+
+### 80/20 Rule
+
+MVP proves:
+
+- ✅ Real API data
+- ✅ Browse products
+- ✅ Search with debouncing
+- ✅ Add to favorites
+- ✅ Add to cart
+- ✅ Checkout structure
+
+This is **80% of value**. Payment, chat, maps = **20%** (Phase 2).
+
+### Perfectionism Trap
+
+**Avoid these questions:**
+
+- "Should I use Provider or Bloc?" → Bloc (decided)
+- "Should button be 48px or 50px?" → Pick one, move on
+- "Should I write tests?" → Not for MVP
+
+**Focus:** Make it work first. Make it beautiful second. Make it perfect never.
+
+### When Stuck
+
+1. Re-read this week's goals
+2. Pick easiest task
+3. Timebox 30 min
+4. Ship imperfect
+
+---
+
+## 📊 Success Metrics
+
+### By Week 9, you'll have:
+
+1. ✅ App that fetches real Amazon products
+2. ✅ User can browse, search, add to favorites
+3. ✅ Guest cart → Auth cart migration works
+4. ✅ Email + Google login functional
+5. ✅ Debug APK tested on device
+6. ✅ ar/en support + Dark mode
+7. ✅ Clean code with Repository Pattern
+8. ✅ Professional README.md
+
+---
+
+
+
+a
+# 📋 Backlog
+## form first week
+📋 Backlog (Post Week 2):
+- [ ] Deals section
+- [ ] Trending section  
+- [ ] Prime section
+- [ ] Popular Collections
+- [ ] AppColors/AppTextStyles
+- [ ] ProductCard badges...
+- [ ]

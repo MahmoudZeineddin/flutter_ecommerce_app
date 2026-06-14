@@ -74,11 +74,11 @@ class AmazonApiClient {
         },
       );
       final products = response.data['data']['products'] as List;
-      // return products.map((product) => ProductModel.fromJson(product)).toList();
-      return dummyProducts;
+      return products.map((product) => ProductModel.fromJson(product)).toList();
+      // return dummyProducts;
     } on DioException catch (e) {
-      return dummyProducts;
-      // throw _handleError(e);
+      // return dummyProducts;
+      throw _handleError(e);
     }
   }
 
@@ -92,11 +92,11 @@ class AmazonApiClient {
         queryParameters: {'category': category, 'country': country},
       );
       final products = response.data['data']['best_sellers'] as List;
-      // return products.map((product) => ProductModel.fromJson(product)).toList();
-      return dummyProducts;
+      return products.map((product) => ProductModel.fromJson(product)).toList();
+      // return dummyProducts;
     } on DioException catch (e) {
-      return [];
-      // throw _handleError(e);
+      // return [];
+      throw _handleError(e);
     }
   }
 
@@ -113,23 +113,23 @@ class AmazonApiClient {
       // print('deals data: $data');
 
       final deals = (response.data['data']['deals'] as List?) ?? [];
-      // return deals
-      //     .map(
-      //       (deal) => ProductModel(
-      //         asin: deal['product_asin'] ?? '',
-      //         productTitle: deal['deal_title'] ?? '',
-      //         productPhoto: deal['deal_photo'],
-      //         productPrice: (deal['deal_price']['amount'] as num).toDouble(),
-      //         productOriginalPrice: (deal['list_price']['amount'] as num)
-      //             .toDouble(),
-      //       ),
-      //     )
-      //     .toList();
-      return dummyProducts;
+      return deals
+          .map(
+            (deal) => ProductModel(
+              asin: deal['product_asin'] ?? '',
+              productTitle: deal['deal_title'] ?? '',
+              productPhoto: deal['deal_photo'],
+              productPrice: (deal['deal_price']['amount'] as num).toDouble(),
+              productOriginalPrice: (deal['list_price']['amount'] as num)
+                  .toDouble(),
+            ),
+          )
+          .toList();
+      // return dummyProducts;
     } on DioException catch (e) {
       // print("Error fetching deals: ${e.message}");
-      // throw _handleError(e);
-      return [];
+      throw _handleError(e);
+      // return [];
     }
   }
 
@@ -137,13 +137,13 @@ class AmazonApiClient {
     try {
       final response = await _dio.get(AppConstants.categoriesEndpoint);
       final categories = response.data['data'] as List;
-      // return categories
-      //     .map((category) => CategoryModel.fromJson(category))
-      //     .toList();
-      return [];
+      return categories
+          .map((category) => CategoryModel.fromJson(category))
+          .toList();
+      // return [];
     } on DioException catch (e) {
-      // throw _handleError(e);
-      return [];
+      throw _handleError(e);
+      // return [];
     }
   }
 
